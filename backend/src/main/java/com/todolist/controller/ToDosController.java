@@ -33,4 +33,10 @@ public class ToDosController{
     public String saveTask(@RequestBody ToDo toDo) {
         return (toDosServices.saveTask(toDo));
     }
+
+    @PutMapping(path = "/update/{id}")
+    public String updateTask (@PathVariable long id, @RequestBody ToDo toDo) {
+        toDo.setId(id);
+        return (toDosServices.updateTask(toDo));
+    }
 }
