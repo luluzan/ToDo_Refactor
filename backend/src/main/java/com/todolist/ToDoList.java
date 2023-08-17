@@ -1,13 +1,13 @@
-package com.example.apiresttodolist;
+package com.todolist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApirestTodolistApplication {
+public class ToDoList {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApirestTodolistApplication.class, args);
+		SpringApplication.run(ToDoList.class, args);
 	}
 
 }
