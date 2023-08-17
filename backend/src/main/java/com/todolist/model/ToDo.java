@@ -1,11 +1,8 @@
 package com.todolist.model;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.sql.Date;
 
 @Entity
@@ -32,7 +29,7 @@ public class ToDo {
     @Column(nullable = false)
     private status status;
 
-    public enum status{
+    public enum status {
         completed,
         pending
     };
