@@ -20,17 +20,17 @@ public class ToDo {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column
     private String description;
 
-    @Column(nullable = false)
+    @Column
     private Date dueDate;
 
-    @Column(nullable = false)
-    private status status;
+    @Column(columnDefinition = "boolean default false")
+    private boolean status;
 
-    public enum status {
-        completed,
-        pending
-    };
+    @Column
+    private String category;
+
+
 }
