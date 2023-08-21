@@ -29,8 +29,15 @@ public class ToDo {
     @Column(columnDefinition = "boolean default false")
     private boolean status;
 
+    @Column(columnDefinition = "priority default normal")
+    private priority priority;
+
+    enum priority {
+        urgent,
+        normal
+    }
+
     @Column
     private String category;
-
 
 }
