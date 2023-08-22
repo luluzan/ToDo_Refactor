@@ -9,6 +9,7 @@ class	ApiConnection
 		try 
 		{
 			let	response = await axios.get(url);
+			console.log(response);
 			return (response);
 		} 
 		catch (error) 
@@ -21,7 +22,7 @@ class	ApiConnection
 	{
 		try 
 		{
-			let	response = await axios.get(`url/${id}`);
+			let	response = await axios.get(`${url}/${id}`);
 			return (response);
 		} 
 		catch (error) 
@@ -34,7 +35,7 @@ class	ApiConnection
 	{
 		try 
 		{
-			let	response = await axios.delete(`url/${id}`);
+			let	response = await axios.delete(`${url}/${id}`);
 			return (response);
 		} 
 		catch (error) 
@@ -60,7 +61,7 @@ class	ApiConnection
 	{
 		try 
 		{
-			let	response = await axios.put(`url/${id}`);
+			let	response = await axios.put(`${url}/${id}`);
 			return (response);
 		} 
 		catch (error) 
