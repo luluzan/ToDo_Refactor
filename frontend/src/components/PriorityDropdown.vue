@@ -4,7 +4,7 @@
 <template>
     <div class="dropdown">
         <select
-          class=""
+          class="select-dropdown"
         >
           
           <option value="normal">Normal</option>

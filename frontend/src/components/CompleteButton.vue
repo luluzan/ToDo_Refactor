@@ -13,6 +13,7 @@ const props = defineProps({
           height="80"
           viewBox="0 0 80 80"
           fill="none"
+          class="completeBtn"
         >
           <circle cx="40" cy="40" r="40" :fill="fill" />
           <path
@@ -22,4 +23,11 @@ const props = defineProps({
         </svg>
 </template>
 
-<style scoped></style>
+<style scoped>
+.completeBtn {
+  position: absolute;
+  top: 340px;
+  left: 350px;
+  cursor: pointer;
+}
+</style>

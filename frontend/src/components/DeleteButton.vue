@@ -13,6 +13,12 @@
         flex-shrink: 0;
         border: none;
         color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20vh auto;
+        font-weight: 700;
+        font-size: 1rem;
     }
 
     .deleteButton:hover {
@@ -20,3 +26,4 @@
         transform: scale(1.1);
     }
 </style>
+  

@@ -9,7 +9,5 @@ import ApiConnection from '../services/ApiConnection'
 </template>
 
 <style scoped>
-    
-
 
 </style>

@@ -16,5 +16,6 @@ export default {
 </script>
 
 <template>
-  <VueDatePicker v-model="date" ></VueDatePicker>
+  <VueDatePicker v-model="date"></VueDatePicker>
 </template>
+
