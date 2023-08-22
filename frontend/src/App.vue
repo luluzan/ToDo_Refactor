@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import TaskListView from './views/TaskListView.vue'
 </script>
 
 <template>
@@ -12,8 +13,8 @@ import { RouterLink, RouterView } from 'vue-router'
       </nav>
     </div>
   </header>
-
   <RouterView />
+  <TaskListView />
 </template>
 
 <style scoped>
