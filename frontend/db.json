@@ -5,7 +5,7 @@
       "title": "walk the dog",
       "description": "",
       "dueDate": 2024,
-      "status": false,
+      "status": true,
       "priority": "normal"
     },
     {
