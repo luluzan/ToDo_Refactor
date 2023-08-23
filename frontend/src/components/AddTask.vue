@@ -3,6 +3,7 @@ import DeleteButton from "../components/DeleteButton.vue";
 import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
+import CloseButton from '../components/closeButton.vue'
 
 const titleAdd = "Add Task";
 const titleEdit = "Edit Task";
@@ -11,6 +12,9 @@ const props = defineProps({
   title: {
     type: String,
   },
+  id: {
+    type: Number,
+  }
 });
 </script>
 
@@ -19,25 +23,13 @@ const props = defineProps({
     <div id="top">
       <h2 class="addTaskTitle">{{ titleAdd }}</h2>
 
-      <svg
-        class="closeBtn"
-        xmlns="http://www.w3.org/2000/svg"
-        width="15"
-        height="15"
-        viewBox="0 0 15 15"
-        fill="none"
-      >
-        <path
-          d="M10.3432 7.5L14.6075 3.23565C15.1308 2.71236 15.1308 1.86392 14.6075 1.3402L13.6598 0.392472C13.1365 -0.130824 12.2881 -0.130824 11.7643 0.392472L7.5 4.65682L3.23565 0.392472C2.71236 -0.130824 1.86392 -0.130824 1.3402 0.392472L0.392472 1.3402C-0.130824 1.86349 -0.130824 2.71193 0.392472 3.23565L4.65682 7.5L0.392472 11.7643C-0.130824 12.2876 -0.130824 13.1361 0.392472 13.6598L1.3402 14.6075C1.86349 15.1308 2.71236 15.1308 3.23565 14.6075L7.5 10.3432L11.7643 14.6075C12.2876 15.1308 13.1365 15.1308 13.6598 14.6075L14.6075 13.6598C15.1308 13.1365 15.1308 12.2881 14.6075 11.7643L10.3432 7.5Z"
-          fill="white"
-        />
-      </svg>
+      <CloseButton path="/"/>
 
       <h4>Task</h4>
-      <input type="text" placeholder="Enter Task" />
+      <input id="taskText" type="text" placeholder="Enter Task" />
 
       <h4>Description (Optional)</h4>
-      <input type="text" placeholder="Enter Description" />
+      <input id="descriptionText" type="text" placeholder="Enter Description" />
       <div>
         <CompleteButton fill="#FF9E13" />
       </div>
@@ -112,16 +104,7 @@ const props = defineProps({
   text-align: center;
 }
 
-.closeBtn {
-  width: 0.9375rem;
-  height: 0.9375rem;
-  flex-shrink: 0;
-  fill: var(--vt-c-white);
-  cursor: pointer;
-  position: absolute;
-  top: 80px;
-  left: 420px;
-}
+
 
 h3 {
   font-weight: 700;
@@ -137,7 +120,7 @@ input {
   border: none;
   border-bottom: 1px solid #FF9E13;
   padding: 5px;
-  color: var(--vt-c-white);
+  color: #ffffff;
   font-size: 1.2rem;
 }
 
@@ -146,6 +129,16 @@ input:focus {
   outline: 2px solid #FF9E13;
   border-color: white;
   color: var(--vt-c-white);
+}
+
+#taskText::placeholder {
+  color: #ffffff;
+  opacity: 0.5;
+}
+
+#descriptionText::placeholder {
+  color: #fff;
+  opacity: 0.5;
 }
 
 .dueDateContainer {
