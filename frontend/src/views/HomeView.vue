@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import AddTask from '../components/AddTask.vue';
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <button>Estas en home</button>
   </main>
 </template>
