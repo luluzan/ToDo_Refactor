@@ -26,16 +26,11 @@ public class ToDo {
     @Column
     private Date dueDate;
 
-    @Column(columnDefinition = "boolean default false")
+    @Column
     private boolean status;
 
-    @Column(columnDefinition = "priority default normal")
-    private priority priority;
-
-    enum priority {
-        urgent,
-        normal
-    }
+    @Column(columnDefinition = "varchar(255) default 'normal'")
+    private String priority;
 
     @Column
     private String category;
