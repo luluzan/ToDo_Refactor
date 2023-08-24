@@ -1,8 +1,11 @@
 <script setup>
+import axios from 'axios'
+import ApiConnection from '../services/ApiConnection'
 import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
 import CloseButton from '../components/closeButton.vue'
+import { ref } from 'vue';
 
 const titleAdd = "Add Task";
 const titleEdit = "Edit Task";
@@ -16,6 +19,19 @@ const props = defineProps({
   }
 });
 
+const taskText = ref('')
+
+async function submit() {
+  try {
+    const response = await axios.post('http://localhost:8080/db_todolist/add', {
+      title: taskText.value
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 </script>
 
 <template>
@@ -26,12 +42,12 @@ const props = defineProps({
       <CloseButton path="/"/>
 
       <h4>Task</h4>
-      <input id="taskText" type="text" placeholder="Enter Task" required="true"/>
+      <input v-model="taskText" id="taskText" type="text" placeholder="Enter Task" required="true"/>
 
       <h4>Description (Optional)</h4>
       <input id="descriptionText" type="text" placeholder="Enter Description" />
       <div>
-        <CompleteButton fill="#FF9E13" />
+        <CompleteButton @click="submit()" fill="#FF9E13" />
       </div>
     </div>
 
@@ -57,7 +73,7 @@ const props = defineProps({
         </div>
       </div>
 
-      <p v-if="!checked">This field is required</p>
+      <p>This field is required</p>
       <div class="priorityContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"

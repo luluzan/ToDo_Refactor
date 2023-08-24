@@ -48,7 +48,7 @@ class	ApiConnection
 	{
 		try 
 		{
-			let	response = await axios.post(url);
+			let	response = await axios.post(url + "/add" + task);
 			return (response);
 		} 
 		catch (error) 

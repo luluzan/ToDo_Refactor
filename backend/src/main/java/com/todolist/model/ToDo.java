@@ -3,10 +3,13 @@ package com.todolist.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.sql.Date;
 
 @Entity
 @Table(name = "todo")
+@CrossOrigin(origins = "*")
 @Getter
 @Setter
 public class ToDo {
