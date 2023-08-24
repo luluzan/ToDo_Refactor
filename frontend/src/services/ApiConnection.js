@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const	url = "http://localhost:3002/tasks";
+const	url = "http://localhost:8080/todo";
 
 class	ApiConnection
 {

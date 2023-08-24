@@ -1,5 +1,4 @@
 <script setup>
-import DeleteButton from "../components/DeleteButton.vue";
 import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
@@ -16,6 +15,7 @@ const props = defineProps({
     type: Number,
   }
 });
+
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const props = defineProps({
       <CloseButton path="/"/>
 
       <h4>Task</h4>
-      <input id="taskText" type="text" placeholder="Enter Task" />
+      <input id="taskText" type="text" placeholder="Enter Task" required="true"/>
 
       <h4>Description (Optional)</h4>
       <input id="descriptionText" type="text" placeholder="Enter Description" />
@@ -57,7 +57,7 @@ const props = defineProps({
         </div>
       </div>
 
-      <p>This field is required</p>
+      <p v-if="!checked">This field is required</p>
       <div class="priorityContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
