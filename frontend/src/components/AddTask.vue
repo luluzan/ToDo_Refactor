@@ -23,7 +23,7 @@ const taskText = ref('')
 
 async function submit() {
   try {
-    const response = await axios.post('http://localhost:8080/db_todolist/add', {
+    const response = await axios.post('http://localhost:8080/todo/add', {
       title: taskText.value
     });
     console.log(response.data);
