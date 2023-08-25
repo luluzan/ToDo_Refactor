@@ -3,7 +3,6 @@ package com.todolist.controller;
 import com.todolist.model.ToDo;
 import com.todolist.services.ToDosServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

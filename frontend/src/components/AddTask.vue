@@ -2,7 +2,7 @@
 import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
-import CloseButton from '../components/closeButton.vue'
+import CloseButton from '../components/CloseButton.vue'
 
 const titleAdd = "Add Task";
 const titleEdit = "Edit Task";
@@ -57,7 +57,7 @@ const props = defineProps({
         </div>
       </div>
 
-      <p v-if="!checked">This field is required</p>
+      <p>This field is required</p>
       <div class="priorityContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
