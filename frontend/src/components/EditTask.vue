@@ -45,7 +45,7 @@ const submit = async () => {
 <template>
   <main class="mainContainer">
     <div id="top">
-      <h2 class="addTaskTitle">Add Task</h2>
+      <h2 class="editTaskTitle">Edit Task</h2>
 
       <CloseButton path="/"/>
 
