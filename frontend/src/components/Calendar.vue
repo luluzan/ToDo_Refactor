@@ -14,6 +14,6 @@ onUpdated(() => {
 </script>
 
 <template>
-  <VueDatePicker v-model="date" modelType="dd.MM.yyyy"></VueDatePicker>
+  <VueDatePicker v-model="date" modelType="yyyy.MM.dd"></VueDatePicker>
 </template>
 
