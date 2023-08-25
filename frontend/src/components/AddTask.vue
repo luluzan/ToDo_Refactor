@@ -1,11 +1,14 @@
 <script setup>
-import axios from 'axios'
 import ApiConnection from '../services/ApiConnection'
 import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
-import CloseButton from '../components/closeButton.vue'
-import { ref } from 'vue';
+import CloseButton from '../components/CloseButton.vue'
+import { ref, onUpdated } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const id = route.params.id;
 
 const titleAdd = "Add Task";
 const titleEdit = "Edit Task";
@@ -13,24 +16,30 @@ const titleEdit = "Edit Task";
 const props = defineProps({
   title: {
     type: String,
-  },
-  id: {
-    type: Number,
   }
 });
 
 const taskText = ref('')
+const newTask = ref({
+  id: id,
+  title: '',
+  description: '',
+  dueDate: '',
+  priority: '',
+  category: ''
+})
+const addTask = new ApiConnection();
 
-async function submit() {
-  try {
-    const response = await axios.post('http://localhost:8080/todo/add', {
-      title: taskText.value
-    });
-    console.log(response.data);
-  } catch (error) {
-    console.log(error);
-  }
+const dateFromChild = ref()
+
+function RecoversFromSon(date){
+  dateFromChild.value=date;
 }
+
+onUpdated(() => {
+  console.log(dateFromChild.value);
+})
+
 
 </script>
 
@@ -42,10 +51,10 @@ async function submit() {
       <CloseButton path="/"/>
 
       <h4>Task</h4>
-      <input v-model="taskText" id="taskText" type="text" placeholder="Enter Task" required="true"/>
+      <input v-model="newTask.title" id="taskText" type="text" placeholder="Enter Task" required="true"/>
 
       <h4>Description (Optional)</h4>
-      <input id="descriptionText" type="text" placeholder="Enter Description" />
+      <input v-model="newTask.description" id="descriptionText" type="text" placeholder="Enter Description" />
       <div>
         <CompleteButton @click="submit()" fill="#FF9E13" />
       </div>
@@ -69,7 +78,7 @@ async function submit() {
 
         <div class="dueDateContent">
           <h3 id="dueDateTitle">Due Date</h3>
-          <Calendar class="calendar"/>
+          <Calendar @date="(date) => dateFromChild = date"/>
         </div>
       </div>
 
@@ -93,7 +102,6 @@ async function submit() {
           <PriorityDropdown />
         </div>
       </div>
-        <DeleteButton />
     </div> 
   </main>
 </template>

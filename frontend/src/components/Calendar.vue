@@ -1,18 +1,16 @@
-<script>
-import { ref } from "vue";
+<script setup>
+import { ref, onUpdated } from "vue";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
-export default {
-  components: { VueDatePicker },
-  setup() {
-    const date = ref();
+const date = ref();
+let emit = defineEmits(['date'])
 
-    return {
-      date,
-    };
-  },
-};
+onUpdated(() => {
+  emit('date', date.value)
+})
+  
+
 </script>
 
 <template>
