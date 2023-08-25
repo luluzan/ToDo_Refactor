@@ -31,23 +31,50 @@ onBeforeMount( async() =>
 </script>
 
 <template>
-	<header>
-		<h2>{{ category }}</h2>
-	</header>
-	<article class="task" v-for="task in tasks.data" :key="task.id">
-		<TaskSelection :task="task"/>
-	</article>
-	<article class="add-button">
-		<AddButton :id="lastId"/>
-	</article>
+	<main class="task-list-layout">
+		<header>
+			<p>The X goes here</p>
+		</header>
+		<section class = "list">
+			<article class="title">
+				<h2>{{ category }}</h2>
+			</article>
+			<section class="tasks">
+				<article class="task" v-for="task in tasks.data" :key="task.id">
+					<TaskSelection :task="task"/>
+				</article>
+			</section>
+		</section>
+		<article class="add-button">
+			<AddButton :id="lastId"/>
+		</article>
+	</main>
 </template>
 
 <style scoped>
-	
+	.task-list-layout
+	{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		height: 100vh;
+	}
+
+	.title
+	{
+		margin: 1rem 0;
+	}
+
+	.tasks
+	{
+		overflow-y: scroll;
+		height: 60vh;
+	}
+
 	.add-button
 	{
 		display: flex;
 		justify-content: center;
 	}
-	
+
 </style>

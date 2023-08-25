@@ -37,7 +37,7 @@ defineProps (
     	align-items: center;
 		justify-content: space-around;
     	background-color: white;
-    	height: 6rem;
+    	height: 7rem;
 		border-radius: 0.8rem;
 		margin: 1rem 0;
 	}
@@ -58,5 +58,5 @@ defineProps (
 		display: flex;
 		justify-content: center;
 	}
-	
+
 </style>

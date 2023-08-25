@@ -14,7 +14,6 @@ import TaskListView from './views/TaskListView.vue'
     </div>
   </header>
   <TaskListView />
-  <RouterView />
 </template>
 
 <style scoped>
