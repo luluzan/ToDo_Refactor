@@ -1,9 +1,18 @@
 <script setup>
+import { onUpdated, ref } from 'vue';
+
+const priority = ref('')
+let emit = defineEmits(['priority'])
+
+onUpdated(() => {
+  emit('priority', priority.value)
+})
+
 </script>
 
 <template>
     <div class="dropdown">
-        <select
+        <select v-model="priority"
           class="select-dropdown"
         >
           

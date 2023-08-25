@@ -8,7 +8,8 @@ import { ref, onUpdated } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const id = route.params.id;
+// const id = route.params.id;
+const id = 10
 
 const titleAdd = "Add Task";
 const titleEdit = "Edit Task";
@@ -20,26 +21,24 @@ const props = defineProps({
 });
 
 const taskText = ref('')
+
 const newTask = ref({
   id: id,
   title: '',
   description: '',
   dueDate: '',
   priority: '',
+  status: '',
   category: ''
 })
+
 const addTask = new ApiConnection();
 
-const dateFromChild = ref()
 
-function RecoversFromSon(date){
-  dateFromChild.value=date;
+const submit = async () => {
+  await addTask.addTask(newTask.value)
+  console.log(newTask);
 }
-
-onUpdated(() => {
-  console.log(dateFromChild.value);
-})
-
 
 </script>
 
@@ -78,7 +77,7 @@ onUpdated(() => {
 
         <div class="dueDateContent">
           <h3 id="dueDateTitle">Due Date</h3>
-          <Calendar @date="(date) => dateFromChild = date"/>
+          <Calendar @date="(date) => newTask.dueDate = date"/>
         </div>
       </div>
 
@@ -99,7 +98,7 @@ onUpdated(() => {
         </svg>
         <div class="priorityContent">
           <h3 id="priorityContentTitle">Priority</h3>
-          <PriorityDropdown />
+          <PriorityDropdown @priority="(priority) => newTask.priority = priority"/>
         </div>
       </div>
     </div> 

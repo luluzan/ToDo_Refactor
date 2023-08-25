@@ -16,6 +16,7 @@ const router = createRouter({
       name: 'AddTask',
       component: AddView
     },
+    
   ]
 })
 
