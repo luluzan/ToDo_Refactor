@@ -13,9 +13,10 @@ import TaskListView from './views/TaskListView.vue'
       </nav>
     </div>
   </header>
-  <RouterView />
   <TaskListView />
+  <RouterView />
 </template>
 
 <style scoped>
+
 </style>

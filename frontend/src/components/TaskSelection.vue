@@ -1,5 +1,6 @@
 <script setup>
 import StatusSelector from './StatusSelector.vue'
+import TaskOpenEdit from './TaskOpenEdit.vue'
 
 defineProps (
 	{
@@ -24,7 +25,7 @@ defineProps (
 			<p>{{ task.priority }}</p>
 		</section>
 		<section class="task-edit">
-			<button>B</button>
+			<TaskOpenEdit :id="task.id"/>
 		</section>
 	</main>
 </template>
@@ -33,14 +34,29 @@ defineProps (
 	.task-container
 	{
 		display: flex;
+    	align-items: center;
+		justify-content: space-around;
+    	background-color: white;
+    	height: 6rem;
+		border-radius: 0.8rem;
+		margin: 1rem 0;
 	}
 
-	.task-selector, .task-edit
+	.status-selector, .task-edit
 	{
-		width: 10%;
+		width: 15%;
 	}
 	.task-info
 	{
-		width: 80%;
+		width: 60%;
+    	height: 70%;
+    	overflow-y: scroll;
 	}
+
+	.status-selector
+	{
+		display: flex;
+		justify-content: center;
+	}
+	
 </style>
