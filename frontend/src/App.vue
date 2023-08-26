@@ -6,8 +6,8 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/Add">AddTask</RouterLink> 
+        <RouterLink to="/"></RouterLink>
+        <!--<RouterLink to="/Add">AddTask</RouterLink> -->
       </nav>
     </div>
   </header>
@@ -16,4 +16,9 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
+  @font-face {
+    font-family: "Inter";
+    src: local("Inter"),
+    url(../src/assets/fonts/Inter/Inter-Regular.ttf) format("truetype");
+  }
 </style>

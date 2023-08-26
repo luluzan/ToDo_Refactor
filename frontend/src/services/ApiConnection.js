@@ -8,9 +8,10 @@ class	ApiConnection
 	{
 		try 
 		{
-			let	response = await axios.get(url);
+			let response = await axios.get(url + "/list");
 			console.log(response);
 			return (response);
+			
 		} 
 		catch (error) 
 		{
@@ -48,7 +49,7 @@ class	ApiConnection
 	{
 		try 
 		{
-			let	response = await axios.post(url);
+			let	response = await axios.post(url, task);
 			return (response);
 		} 
 		catch (error) 
@@ -71,4 +72,4 @@ class	ApiConnection
 	}
 }
 
-export default ApiConnection;
+export default new ApiConnection();

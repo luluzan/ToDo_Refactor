@@ -1,9 +1,10 @@
 <script setup>
-import AddTask from '../components/AddTask.vue';
+import ListTasks from '../components/ListTasks.vue';
 </script>
 
 <template>
   <main>
-    <button>Estas en home</button>
+    <ListTasks />
   </main>
 </template>
+<style scoped></style>
