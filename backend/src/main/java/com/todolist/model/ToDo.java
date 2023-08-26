@@ -3,12 +3,15 @@ package com.todolist.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.sql.Date;
 
 @Entity
 @Table(name = "todo")
 @Getter
 @Setter
+@CrossOrigin(origins = "*")
 public class ToDo {
     public ToDo() {
     }
@@ -29,7 +32,7 @@ public class ToDo {
     @Column
     private boolean status;
 
-    @Column(columnDefinition = "varchar(255) default 'normal'")
+    @Column(columnDefinition = "varchar(8) default 'normal'")
     private String priority;
 
     @Column
