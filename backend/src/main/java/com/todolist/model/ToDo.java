@@ -29,10 +29,17 @@ public class ToDo {
     @Column
     private boolean status;
 
-    @Column(columnDefinition = "varchar(255) default 'normal'")
-    private String priority;
+    @Column(columnDefinition = "varchar(10) default 'normal'")
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
 
     @Column
     private String category;
 
+    enum Priority
+    {
+        normal,
+        high,
+        urgent,
+    }
 }
