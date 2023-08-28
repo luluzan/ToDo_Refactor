@@ -1,4 +1,4 @@
-<script setup>
+<script setup> //This component is to be used when dealing with categories
 import { onBeforeMount, ref } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
 import GetTasks from '../services/ApiConnection'

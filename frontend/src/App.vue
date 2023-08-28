@@ -2,7 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import TaskListView from './views/TaskListView.vue';
 
-const	priority = "urgent";
+const	priority = "high";
 </script>
 
 <template>
