@@ -4,18 +4,19 @@ import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
 import CloseButton from '../components/CloseButton.vue'
-import { ref, computed } from 'vue';
+import DeleteButton from '../components/DeleteButton.vue'
+import { ref, onBeforeMount } from 'vue';
+import { useRoute } from 'vue-router';
 
-const props = defineProps({
-  title: {
-    type: String,
-  }
-});
 
-const id = ref()
+const route = useRoute();
+//const id = 12;
+const id = route.params.id;
 
-const newTask = ref({
-  id: null,
+const taskText = ref('')
+
+const editedTask = ref({
+  id: '',
   title: '',
   description: '',
   dueDate: '',
@@ -24,23 +25,32 @@ const newTask = ref({
   category: ''
 })
 
-const addTask = new ApiConnection();
+const getTasks = new ApiConnection();
+const title = ref('')
+const description = ref('')
+const category = ref('')
+const dueDate = ref('')
+const priority = ref('')
 
-const isAllFieldsFilled = computed(() => {
-  return (
-    newTask.value.title.trim() !== '' &&
-    newTask.value.dueDate.trim() !== '' &&
-    newTask.value.priority.trim() !== ''
-  );
-});
+onBeforeMount(async () => {
+  const task = await getTasks.getTaskById(id)
+  
+  title.value = task.data.title
+  description.value = task.data.description
+  category.value = task.data.category
+  dueDate.value = task.data.dueDate
+  priority.value = task.data.priority
+  editedTask.value.id = id
+  
+})
 
 const submit = async () => {
-  if (isAllFieldsFilled.value) {
-    await addTask.addTask(newTask.value);
-    console.log(newTask);
-  } else {
-    console.log('Please fill in all required fields.');
-  }
+  await getTasks.updateTask(editedTask.value.id, editedTask.value)
+}
+
+const deleteTask = async () => {
+  await getTasks.deleteTaskById(editedTask.value.id)
+  console.log("Task deleted");
 }
 
 </script>
@@ -48,20 +58,20 @@ const submit = async () => {
 <template>
   <main class="mainContainer">
     <div id="top">
-      <h2 class="addTaskTitle">Add Task</h2>
+      <h2 class="editTaskTitle">Edit Task</h2>
 
       <CloseButton path="/"/>
 
       <h4>Task</h4>
-      <input v-model="newTask.title" id="taskText" type="text" placeholder="Enter Task" required="true"/>
+      <input v-model="editedTask.title" id="taskText" type="text" :placeholder="title" required="true"/>
 
       <h4>Description (Optional)</h4>
-      <input v-model="newTask.description" id="descriptionText" type="text" placeholder="Enter Description" />
-
+      <input v-model="editedTask.description" id="descriptionText" type="text" :placeholder="description" />
+      
       <h4>Category (Optional)</h4>
-      <input v-model="newTask.category" id="categoryText" type="text" placeholder="Enter Category">
+      <input v-model="editedTask.category" id="categoryText" type="text" :placeholder="category">
       <div>
-        <CompleteButton @click="submit()" :fill="isAllFieldsFilled ? '#FF9E13' : '#565656'" />
+        <CompleteButton @click="submit()" fill="#FF9E13" />
       </div>
     </div>
 
@@ -83,11 +93,11 @@ const submit = async () => {
 
         <div class="dueDateContent">
           <h3 id="dueDateTitle">Due Date</h3>
-          <Calendar @date="(date) => newTask.dueDate = date"/>
+          <Calendar @date="(date) => editedTask.dueDate = date" />
+            <button >Current due date: {{ dueDate }}</button>
         </div>
       </div>
 
-      <p>This field is required</p>
       <div class="priorityContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -104,8 +114,14 @@ const submit = async () => {
         </svg>
         <div class="priorityContent">
           <h3 id="priorityContentTitle">Priority</h3>
-          <PriorityDropdown @priority="(priority) => newTask.priority = priority"/>
+          <PriorityDropdown :value="priority" @priority="(priority) => editedTask.priority = priority"/>
+            <button>Current priority: {{ priority }}</button>
         </div>
+
+       
+      </div>
+      <div>
+        <DeleteButton @click="deleteTask()"/>
       </div>
     </div> 
   </main>
@@ -127,7 +143,7 @@ const submit = async () => {
   padding: 30px 20px 0;
 }
 
-.addTaskTitle {
+.editTaskTitle {
   color: var(--vt-c-white);
   margin: 0;
   text-align: center;
@@ -143,6 +159,7 @@ h4 {
   color: #FF9E13;
   margin: 1rem 0;
 }
+
 
 input {
   background-color: #dd4b39;
@@ -171,7 +188,7 @@ input:focus {
 }
 
 #categoryText::placeholder {
-  color: #ffffff;
+  color: #fff;
   opacity: 0.5;
 }
 

@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AddView from '../views/AddView.vue'
+import EditView from '../views/EditView.vue'
+import TaskListView from '../views/TaskListView.vue'
 
 
 const router = createRouter({
@@ -16,6 +18,16 @@ const router = createRouter({
       name: 'AddTask',
       component: AddView
     },
+    {
+      path: '/edit/:id',
+      name: 'EditTask',
+      component: EditView
+    },
+	{
+		path: '/list/:priority',
+		name: 'TaskList',
+		component: TaskListView
+	}
   ]
 })
 
