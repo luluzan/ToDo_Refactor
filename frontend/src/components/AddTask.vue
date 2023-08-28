@@ -4,7 +4,7 @@ import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
 import CloseButton from '../components/CloseButton.vue'
-import { ref, onUpdated } from 'vue';
+import { ref, computed } from 'vue';
 
 const props = defineProps({
   title: {
@@ -15,7 +15,7 @@ const props = defineProps({
 const id = ref()
 
 const newTask = ref({
-  id: id,
+  id: null,
   title: '',
   description: '',
   dueDate: '',
@@ -26,10 +26,21 @@ const newTask = ref({
 
 const addTask = new ApiConnection();
 
+const isAllFieldsFilled = computed(() => {
+  return (
+    newTask.value.title.trim() !== '' &&
+    newTask.value.dueDate.trim() !== '' &&
+    newTask.value.priority.trim() !== ''
+  );
+});
 
 const submit = async () => {
-  await addTask.addTask(newTask.value)
-  console.log(newTask);
+  if (isAllFieldsFilled.value) {
+    await addTask.addTask(newTask.value);
+    console.log(newTask);
+  } else {
+    console.log('Please fill in all required fields.');
+  }
 }
 
 </script>
@@ -50,7 +61,7 @@ const submit = async () => {
       <h4>Category (Optional)</h4>
       <input v-model="newTask.category" id="categoryText" type="text" placeholder="Enter Category">
       <div>
-        <CompleteButton @click="submit()" fill="#FF9E13" />
+        <CompleteButton @click="submit()" :fill="isAllFieldsFilled ? '#FF9E13' : '#565656'" />
       </div>
     </div>
 
