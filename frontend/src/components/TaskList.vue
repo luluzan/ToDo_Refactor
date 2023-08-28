@@ -4,6 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import GetTasks from '../services/ApiConnection'
 import TaskSelection from './TaskSelection.vue'
 import AddButton from './AddButton.vue'
+import CloseButton from './CloseButton.vue';
 
 defineProps
 (
@@ -24,7 +25,6 @@ onBeforeMount( async() =>
 {
 	tasks.value = await getTasks.getAllTasks();
 	lastId.value = tasks.value.data.length + 1;
-	console.log(lastId.value);
 }
 )
 
@@ -32,17 +32,20 @@ onBeforeMount( async() =>
 
 <template>
 	<main class="task-list-layout">
-		<header>
-			<p>The X goes here</p>
+		<header class="task-list-header">
+			<CloseButton path="/" />
 		</header>
 		<section class = "list">
 			<article class="title">
 				<h2>{{ category }}</h2>
 			</article>
-			<section class="tasks">
+			<section v-if="tasks.data" class="tasks">
 				<article class="task" v-for="task in tasks.data" :key="task.id">
 					<TaskSelection :task="task"/>
 				</article>
+			</section>
+			<section v-else>
+				<h3>No tasks added to this list</h3>
 			</section>
 		</section>
 		<article class="add-button">
@@ -52,6 +55,12 @@ onBeforeMount( async() =>
 </template>
 
 <style scoped>
+
+	.task-list-header
+	{
+		display: flex;
+		justify-content: end;
+	}
 	.task-list-layout
 	{
 		display: flex;
