@@ -1,10 +1,11 @@
 <script setup>
-import AddTask from '../components/AddTask.vue';
+import EditTask from '../components/EditTask.vue';
+
 
 </script>
 
 <template>
-    <AddTask />
+    <EditTask />
 </template>
 
 <style scoped>

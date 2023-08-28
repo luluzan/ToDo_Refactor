@@ -55,6 +55,9 @@ const submit = async () => {
 
       <h4>Description (Optional)</h4>
       <input v-model="newTask.description" id="descriptionText" type="text" placeholder="Enter Description" />
+      
+      <h4>Category (Optional)</h4>
+      <input v-model="newTask.category" id="categoryText" type="text" placeholder="Enter Category">
       <div>
         <CompleteButton @change="submit()" fill="#FF9E13" />
       </div>
@@ -161,6 +164,11 @@ input:focus {
 }
 
 #descriptionText::placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+#categoryText::placeholder {
   color: #fff;
   opacity: 0.5;
 }

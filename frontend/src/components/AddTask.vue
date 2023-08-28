@@ -12,6 +12,7 @@ const props = defineProps({
   }
 });
 
+const id = ref()
 
 const newTask = ref({
   id: id,
