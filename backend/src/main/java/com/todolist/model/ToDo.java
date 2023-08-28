@@ -9,7 +9,6 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "todo")
-@CrossOrigin(origins = "*")
 @Getter
 @Setter
 @CrossOrigin(origins = "*")
