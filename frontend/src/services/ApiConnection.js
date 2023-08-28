@@ -48,7 +48,7 @@ class	ApiConnection
 	{
 		try 
 		{
-			let	response = await axios.post(url + '/add', task);
+			let	response = await axios.post(url, task);
 			// let	response = await axios.post(url + '/' + task.id);
 			return (response);
 		} 
