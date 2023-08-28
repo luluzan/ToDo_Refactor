@@ -194,7 +194,7 @@ h1{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 8.3125rem;
+  margin-top: 5rem;
 }
 
 .categories-title{

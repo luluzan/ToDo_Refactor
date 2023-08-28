@@ -49,7 +49,7 @@ console.log(props.tasks);
 .rectangle-color{
   margin-top:3.5rem;
   background-color: rgba(58, 47, 132, 1);
-  width: 120%;
+  width: 90%;
   border-radius:0.7rem;
 }
 
