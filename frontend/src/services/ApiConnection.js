@@ -8,7 +8,7 @@ class	ApiConnection
 	{
 		try 
 		{
-			let response = await axios.get(url + "/list");
+			let response = await axios.get(url);
 			console.log(response);
 			return (response);
 			

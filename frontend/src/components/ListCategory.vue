@@ -1,69 +1,32 @@
 <script setup>
 import StatusSelector from "../components/StatusSelector.vue"
-import ApiConnection from '../services/ApiConnection';
-import DetailsButton from '../components/DetailsButton.vue';
-import { ref, onBeforeMount, computed } from 'vue';
-
-const tasks = ref([]);
-
-function getTasks() {
-    ApiConnection.getAllTasks()
-        .then(response => {
-          tasks.value = response.data;
-          tasks.value.sort(((a, b) => {
-            const orderPriority = {veryhigh: 1, high: 2, normal: 3};
-            const orderByPriority = orderPriority[a.priority] - orderPriority[b.priority];
-            const orderByDate = new Date(a.dueDate).getDate() - new Date(b.dueDate).getDate();
-            return (orderByPriority === 0 ? orderByDate : orderByPriority);
-          }));
-          console.table(response.data);
-        })
-        .catch(e => {
-            console.log(e);
-        });
-}
-
-onBeforeMount(() => {
-  getTasks();
-})
-
-
-let emit = defineEmits(['sendId']);
-
-function EmitId(id){ 
-    emit('sendId', id);
-}
+import DetailsButton from "../components/DetailsButton.vue"
 
 const props = defineProps({
-  fill: {
-    type: String
-  },
   priority: {
-    type:String
+    type:String,
+  },
+  tasks:{
+    type: Object,
+    
   }
 })
 
-let fillClass = computed(() => {
-  return props.fill;
-});
-
-let priorityClass = computed(() => {
-  return props.priority;
-});
+console.log(props.tasks);
 
 </script>
 <template>
   <main>
-    <div class="rectangle-color" :class="fillClass">
+    <div class="rectangle-color" :class=props.priority>
       <div class="rectangle-category">
-        <h2 class="categories-list"> priorityClass</h2>
-        <DetailsButton path="/"></DetailsButton>          
+        <h2 class="categories-list"> {{props.priority}}</h2>
+        <DetailsButton :priority="props.priority"></DetailsButton>          
       </div>
       <div class="tasks-list">
-        <ul v-for="(task, index) in tasks">
-          <li v-if="task.priority ==='priorityClass'" :key="index" @click="EmitId(task.id)">
-          <!--<StatusSelector ></StatusSelector>-->
-          {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
+        <ul v-for="(task, index) in props.tasks">
+          <li v-if="task.priority ==='props.priority'" :key="index">
+            <StatusSelector :id="task.id" :status="task.status"></StatusSelector>/>
+            {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
           </li>
         </ul>
       </div>
@@ -72,24 +35,31 @@ let priorityClass = computed(() => {
 </template>
 <style scoped>
 
+@font-face
+{
+  font-family: "Inter";
+  src: local("Inter"),
+  url(../src/assets/fonts/Inter/Inter-Regular.ttf) format("truetype");
+}
 .rectangle-color{
   margin-top:3.5rem;
   background-color: rgba(58, 47, 132, 1);
-  width: 70%;
-  height: 35.375rem;
-  border:rgba(58, 47, 132, 1) solid 0.0625rem;
+  width: 120%;
   border-radius:0.7rem;
 }
 
-.veryhigh{
+.urgent{
+  border:red solid 0.0625rem;
   background-color:red;
 }
 
 .high{
+  border:yellow solid 0.0625rem;
   background-color:yellow;
 }
 
 .normal{
+  border:green solid 0.0625rem;
   background-color:green;
 }
 

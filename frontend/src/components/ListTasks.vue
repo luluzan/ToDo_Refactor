@@ -1,7 +1,6 @@
 <script setup>
 import StatusSelector from "../components/StatusSelector.vue"
 import ApiConnection from '../services/ApiConnection';
-import DetailsButton from "./DetailsButton.vue";
 import ListCategory from "./ListCategory.vue";
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
@@ -10,31 +9,25 @@ import { ref, onBeforeMount } from 'vue';
 const tasks = ref([]);
 
 function getTasks() {
-    ApiConnection.getAllTasks()
-        .then(response => {
-          tasks.value = response.data;
-          tasks.value.sort(((a, b) => {
-            const orderPriority = {veryhigh: 1, high: 2, normal: 3};
-            const orderByPriority = orderPriority[a.priority] - orderPriority[b.priority];
-            const orderByDate = new Date(a.dueDate).getDate() - new Date(b.dueDate).getDate();
-            return (orderByPriority === 0 ? orderByDate : orderByPriority);
-          }));
-          console.table(response.data);
-        })
-        .catch(e => {
-            console.log(e);
-        });
+  ApiConnection.getAllTasks()
+  .then(response => {
+    tasks.value = response.data;
+    tasks.value.sort(((a, b) => {
+      const orderPriority = {urgent: 1, high: 2, normal: 3};
+      const orderByPriority = orderPriority[a.priority] - orderPriority[b.priority];
+      const orderByDate = new Date(a.dueDate).getDate() - new Date(b.dueDate).getDate();
+      return (orderByPriority === 0 ? orderByDate : orderByPriority);
+    }));
+    console.table(response.data);
+  })
+  .catch(e => {
+    console.log(e);
+  });
 }
 
 onBeforeMount(() => {
   getTasks();
 })
-
-let emit = defineEmits(['sendPriority']);
-
-function EmitPriority(priority){ 
-    emit('sendPriority', priority);
-}
 
 </script>
 
@@ -54,11 +47,58 @@ function EmitPriority(priority){
           <path d="M43.8571 24.7857H34.2143V15.1429C34.2143 13.9596 33.2547 13 32.0714 13H29.9286C28.7453 13 27.7857 13.9596 27.7857 15.1429V24.7857H18.1429C16.9596 24.7857 16 25.7453 16 26.9286V29.0714C16 30.2547 16.9596 31.2143 18.1429 31.2143H27.7857V40.8571C27.7857 42.0404 28.7453 43 29.9286 43H32.0714C33.2547 43 34.2143 42.0404 34.2143 40.8571V31.2143H43.8571C45.0404 31.2143 46 30.2547 46 29.0714V26.9286C46 25.7453 45.0404 24.7857 43.8571 24.7857Z" fill="white"/>
         </svg>
       </div>
+      <span class="new-task">Add new task</span>
     </div>
+   <div class="rectangles-categories">
+    <ListCategory :priority="'urgent'" :tasks="tasks.value"></ListCategory>
+    <ListCategory :priority="'high'" :tasks="tasks.value"></ListCategory>
+    <ListCategory :priority="'normal'" :tasks="tasks.value"></ListCategory>
+    </div>
+   <!-- <div class="rectangles-categories">
+      
+    <div class="rectangle-color color-red">
+        <div class="rectangle-category">
+          <h2 class="categories-list">Muy Urgente</h2>
+          <DetailsButton path="/"  @click="EmitPriority('veryhigh')"></DetailsButton>
+        </div>
+        <div class="tasks-list">
+          <ul v-for="(task, index) in tasks">
+            <li v-if="task.priority ==='veryhigh'" :key="index">
+              {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
+            </li>
+          </ul>
+        </div>
+      </div>  
+    </div>
+      <div class="rectangle-color color-orange">
+        <div class="rectangle-category">
+          <h2 class="categories-list">Urgente</h2>
+          <DetailsButton path="/"  @click="EmitPriority('high')"></DetailsButton>
+        </div>
+        <div class="tasks-list">
+          <ul v-for="(task, index) in tasks">
+            <li v-if="task.priority ==='high'" :key="index">
+            {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="rectangle-color color-green">
+      <div class="rectangle-category">
+        <h2 class="categories-list">Normal</h2>
+        <DetailsButton path="/" @click="EmitPriority('normal')"></DetailsButton>
+      </div>
+      <div class="tasks-list">
+        <ul v-for="(task, index) in tasks">
+          <li v-if="task.priority ==='normal'" :key="index">
+          {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
+          </li>
+        </ul>
+      </div>
 
-    <div class="rectangles-categories">
-    </div>
-      <Carousel>
+   
+          </div>   -->
+      <!--<Carousel>
         <Slide v-for="slide in 3" :key="slide">
           <div class="carousel__item">
             <div class="rectangle-color color-red">
@@ -69,7 +109,6 @@ function EmitPriority(priority){
               <div class="tasks-list">
                 <ul v-for="(task, index) in tasks">
                   <li v-if="task.priority ==='veryhigh'" :key="index">
-                    <!--<StatusSelector></StatusSelector>-->
                     {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
                   </li>
                 </ul>
@@ -100,7 +139,6 @@ function EmitPriority(priority){
             <div class="tasks-list">
               <ul v-for="(task, index) in tasks">
                 <li v-if="task.priority ==='normal'" :key="index">
-                <!--<StatusSelector ></StatusSelector>-->
                 {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
                 </li>
               </ul>
@@ -114,15 +152,24 @@ function EmitPriority(priority){
           <Pagination />
         </template>
 
-      </Carousel>
+      </Carousel>-->
 
   </main>
   
 </template>
 
 <style scoped>
+
+@font-face 
+{
+  font-family: "Inter";
+  src: local("Inter"),
+  url(../src/assets/fonts/Inter/Inter-Regular.ttf) format("truetype");
+}
+  
 .main-container{
   background: #F5F5F5;
+  min-height: 58.25rem;
 }
 
 header{
@@ -137,7 +184,11 @@ h1{
   font: normal 700 1.5rem "Inter";
   color:rgba(255, 255, 255, 1);
 }
-
+.new-task{
+  color: rgba(255, 0, 0, 1);
+  font: capitalize 400 1rem normal "Inter";
+  margin-top: 1rem;
+}
 .categories{
   display:flex;
   flex-direction: column;
@@ -160,6 +211,14 @@ h1{
   height: 3.5rem;
 }
 
+.rectangles-categories{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+}
+
 .carousel__item {
   min-height: 200px;
   width: 100%;
@@ -179,11 +238,12 @@ h1{
   box-sizing: content-box;
   border: 5px solid white;
 }
+
+/*
 .rectangle-color{
   margin-top:3.5rem;
   background-color: rgba(58, 47, 132, 1);
   width: 21.5rem;
-  height: 35.375rem;
   border:rgba(58, 47, 132, 1) solid 0.0625rem;
   border-radius:0.7rem;
 }
@@ -202,11 +262,7 @@ h1{
   background-color:green;
   border-color:green;
 }
-.rectangles-categories{
-  display:flex;
-  flex-direction: column;
-  justify-content: left;
-}
+
 .rectangle-category{
   display: flex;
   flex-direction: row;
@@ -243,5 +299,6 @@ li{
   padding-left:0;
   padding-right:0.25rem;
 }
+*/
 
 </style>
