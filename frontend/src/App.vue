@@ -1,5 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import TaskListView from './views/TaskListView.vue';
+
+const	priority = "high";
 </script>
 
 <template>
@@ -7,12 +10,12 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/add">Add Task</RouterLink> 
+        <RouterLink to="/add">Add Task</RouterLink>
         <RouterLink to="/edit">Edit Task</RouterLink>
+        <RouterLink :to="'/list/' + priority">Task List</RouterLink>
       </nav>
     </div>
   </header>
-
   <RouterView />
 </template>
 
