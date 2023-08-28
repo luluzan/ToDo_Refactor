@@ -50,9 +50,9 @@ onBeforeMount(() => {
       <span class="new-task">Add new task</span>
     </div>
    <div class="rectangles-categories">
-    <ListCategory :priority="'urgent'" :tasks="tasks.value"></ListCategory>
-    <ListCategory :priority="'high'" :tasks="tasks.value"></ListCategory>
-    <ListCategory :priority="'normal'" :tasks="tasks.value"></ListCategory>
+    <ListCategory :priority="'urgent'" :tasks="tasks"></ListCategory>
+    <ListCategory :priority="'high'" :tasks="tasks"></ListCategory>
+    <ListCategory :priority="'normal'" :tasks="tasks"></ListCategory>
     </div>
    <!-- <div class="rectangles-categories">
       

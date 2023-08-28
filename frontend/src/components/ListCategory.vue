@@ -1,6 +1,7 @@
 <script setup>
 import StatusSelector from "../components/StatusSelector.vue"
 import DetailsButton from "../components/DetailsButton.vue"
+import { onBeforeMount } from "vue";
 
 const props = defineProps({
   priority: {
@@ -12,6 +13,9 @@ const props = defineProps({
   }
 })
 
+onBeforeMount(() => {
+  console.log(props.tasks);
+})
 console.log(props.tasks);
 
 </script>
@@ -19,15 +23,16 @@ console.log(props.tasks);
   <main>
     <div class="rectangle-color" :class=props.priority>
       <div class="rectangle-category">
-        <h2 class="categories-list"> {{props.priority}}</h2>
-        <DetailsButton :priority="props.priority"></DetailsButton>          
+        <h2 class="categories-list"> {{priority}}</h2>
+        <DetailsButton :priority="priority"></DetailsButton>          
       </div>
       <div class="tasks-list">
-        <ul v-for="(task, index) in props.tasks">
-          <li v-if="task.priority ==='props.priority'" :key="index">
-            <StatusSelector :id="task.id" :status="task.status"></StatusSelector>/>
+        <ul v-for="(task, index) in tasks" :key="index">
+          <li v-if="task.priority ===props.priority" >
+            <StatusSelector :id="task.id" :status="task.status"></StatusSelector>
             {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
           </li>
+                   
         </ul>
       </div>
     </div>

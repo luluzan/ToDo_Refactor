@@ -1,5 +1,5 @@
 <script setup>
-import GetTasks from "../services/ApiConnection"
+import getTasks from "../services/ApiConnection"
 
 	const	props = defineProps (
 		{
@@ -10,7 +10,7 @@ import GetTasks from "../services/ApiConnection"
 		}
 	)
 
-	const	getTasks = new GetTasks();	
+	//const	getTasks = new GetTasks();	
 	const	ftStatusChange = async() =>
 	{
 		const	task = await getTasks.getTaskById(props.id);
