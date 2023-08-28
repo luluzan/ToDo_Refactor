@@ -21,8 +21,8 @@ import GetTasks from "../services/ApiConnection"
 	const	ftStatusChange = async() =>
 	{
 		const task = await getTasks.getTaskById(props.id);
-		task.value.data.status = !task.value.data.status;
-		await getTasks.updateTask(props.id, task.value.data);
+		task.data.status = !task.data.status;
+		await getTasks.updateTask(props.id, task.data);
 	}
 
 </script>
