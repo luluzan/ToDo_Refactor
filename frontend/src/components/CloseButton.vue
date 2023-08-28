@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <a :href=path>
+  <router-link :to="path">
     <svg
       class="closeBtn"
       xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ const props = defineProps({
         fill="black"
       />
     </svg>
-  </a>
+  </router-link>
 </template>
 
 <style scoped>

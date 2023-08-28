@@ -49,7 +49,7 @@ onBeforeMount( async() =>
 			</section>
 		</section>
 		<article class="add-button">
-			<AddButton :id="lastId"/>
+			<AddButton />
 		</article>
 	</main>
 </template>
