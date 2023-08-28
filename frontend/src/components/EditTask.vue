@@ -5,14 +5,8 @@ import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
 import CloseButton from '../components/CloseButton.vue'
 import { ref, onUpdated } from 'vue';
-import { useRoute } from 'vue-router';
-
-const route = useRoute();
-// const id = route.params.id;
 const id = 10
 
-const titleAdd = "Add Task";
-const titleEdit = "Edit Task";
 
 const props = defineProps({
   title: {

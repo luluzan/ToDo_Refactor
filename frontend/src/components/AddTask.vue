@@ -8,7 +8,6 @@ import { ref, onUpdated } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-// const id = route.params.id;
 const id = 10
 
 const titleAdd = "Add Task";
@@ -54,6 +53,9 @@ const submit = async () => {
 
       <h4>Description (Optional)</h4>
       <input v-model="newTask.description" id="descriptionText" type="text" placeholder="Enter Description" />
+
+      <h4>Category (Optional)</h4>
+      <input v-model="newTask.category" id="categoryText" type="text" placeholder="Enter Category">
       <div>
         <CompleteButton @click="submit()" fill="#FF9E13" />
       </div>
@@ -161,6 +163,11 @@ input:focus {
 
 #descriptionText::placeholder {
   color: #fff;
+  opacity: 0.5;
+}
+
+#categoryText::placeholder {
+  color: #ffffff;
   opacity: 0.5;
 }
 
