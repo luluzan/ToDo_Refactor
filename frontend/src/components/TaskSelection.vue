@@ -1,8 +1,9 @@
 <script setup>
+import {ref, onBeforeMount} from 'vue'
 import StatusSelector from './StatusSelector.vue'
 import EditButton from './EditButton.vue'
 
-defineProps (
+const props = defineProps (
 	{
 		task:
 		{
@@ -11,15 +12,22 @@ defineProps (
 	}
 )
 
+const currentStatus = ref();
+
+onBeforeMount(() =>
+{
+	currentStatus.value = props.task.status;
+})
+
 </script>
 
 <template>
 	<main class="task-container">
 		<section class="status-selector">
-			<StatusSelector :id="task.id" :status="task.status"/>
+			<StatusSelector :id="task.id" :status="task.status" @response="(data) => currentStatus = data"/>
 		</section>
 		<section class="task-info">
-			<h3 v-if="task.status" class="done">{{ task.title }}</h3>
+			<h3 v-if="currentStatus" class="done">{{ task.title }}</h3>
 			<h3 v-else>{{ task.title }}</h3>
 			<p v-if="task.description">{{ task.description }}</p>
 			<p>{{ task.dueDate }}</p>
