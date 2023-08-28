@@ -1,5 +1,5 @@
 <script setup>
-import ApiConnection from '../services/ApiConnection'
+import addTask from '../services/ApiConnection'
 import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
@@ -24,7 +24,7 @@ const newTask = ref({
   category: ''
 })
 
-const addTask = new ApiConnection();
+// const addTask = new ApiConnection();
 
 const isAllFieldsFilled = computed(() => {
   return (

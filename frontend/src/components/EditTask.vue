@@ -1,5 +1,5 @@
 <script setup>
-import ApiConnection from '../services/ApiConnection'
+import getTasks from '../services/ApiConnection'
 import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
@@ -25,7 +25,7 @@ const editedTask = ref({
   category: ''
 })
 
-const getTasks = new ApiConnection();
+// const getTasks = new ApiConnection();
 const title = ref('')
 const description = ref('')
 const category = ref('')
