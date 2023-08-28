@@ -28,7 +28,7 @@ public class ToDosController{
         return toDosServices.deleteTask(id);
     }
 
-    @PostMapping(path = "/")
+    @PostMapping
     public String saveTask(@RequestBody ToDo toDo) {
         return (toDosServices.saveTask(toDo));
     }
