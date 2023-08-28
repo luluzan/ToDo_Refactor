@@ -16,10 +16,11 @@ defineProps (
 <template>
 	<main class="task-container">
 		<section class="status-selector">
-			<StatusSelector :id="task.id"/>
+			<StatusSelector :id="task.id" :status="task.status"/>
 		</section>
 		<section class="task-info">
-			<h3>{{ task.title }}</h3>
+			<h3 v-if="task.status" class="done">{{ task.title }}</h3>
+			<h3 v-else>{{ task.title }}</h3>
 			<p v-if="task.description">{{ task.description }}</p>
 			<p>{{ task.dueDate }}</p>
 			<p>{{ task.priority }}</p>
@@ -57,6 +58,11 @@ defineProps (
 	{
 		display: flex;
 		justify-content: center;
+	}
+
+	.done
+	{
+		text-decoration: line-through;
 	}
 
 </style>
