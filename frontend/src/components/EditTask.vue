@@ -33,10 +33,12 @@ const newTask = ref({
 
 const getTasks = new ApiConnection();
 
+onBeforeMount(async () => {
+  const task = await getTasks.getTaskById(id)
+})
 
 const submit = async () => {
-  const task = await getTasks.getTaskById(props.id)
-
+  
   task.data.status = !task.data.status;
   await getTasks.updateTask(props.id, task.data)
 }
@@ -125,7 +127,7 @@ const submit = async () => {
   padding: 30px 20px 0;
 }
 
-.addTaskTitle {
+.editTaskTitle {
   color: var(--vt-c-white);
   margin: 0;
   text-align: center;
