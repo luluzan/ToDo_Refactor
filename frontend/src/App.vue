@@ -11,7 +11,7 @@ const	priority = "high";
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/add">Add Task</RouterLink>
-        <RouterLink to="/edit">Edit Task</RouterLink>
+        <!-- <RouterLink to="/edit">Edit Task</RouterLink> -->
         <RouterLink :to="'/list/' + priority">Task List</RouterLink>
       </nav>
     </div>
