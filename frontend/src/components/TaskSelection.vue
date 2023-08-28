@@ -1,6 +1,6 @@
 <script setup>
 import StatusSelector from './StatusSelector.vue'
-import TaskOpenEdit from './TaskOpenEdit.vue'
+import EditButton from './EditButton.vue'
 
 defineProps (
 	{
@@ -26,7 +26,7 @@ defineProps (
 			<p>{{ task.priority }}</p>
 		</section>
 		<section class="task-edit">
-			<TaskOpenEdit :id="task.id"/>
+			<EditButton :id="task.id"/>
 		</section>
 	</main>
 </template>
