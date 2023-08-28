@@ -1,15 +1,16 @@
 <script setup>
-import StatusSelector from "../components/StatusSelector.vue"
 import ApiConnection from '../services/ApiConnection';
 import ListCategory from "./ListCategory.vue";
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import { ref, onBeforeMount } from 'vue';
+import AddButton from './AddButton.vue';
 
 const tasks = ref([]);
+const getTasks = new ApiConnection();
 
-function getTasks() {
-  ApiConnection.getAllTasks()
+function getAllTasks() {
+  getTasks.getAllTasks()
   .then(response => {
     tasks.value = response.data;
     tasks.value.sort(((a, b) => {
@@ -26,7 +27,7 @@ function getTasks() {
 }
 
 onBeforeMount(() => {
-  getTasks();
+  getAllTasks();
 })
 
 </script>
@@ -42,118 +43,16 @@ onBeforeMount(() => {
     <div class="categories">  
       <p class="categories-title">My To do´s</p>
       <div class="ico-addTask">
-        <svg width="61" height="56" viewBox="0 0 61 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="61" height="56" rx="5" fill="#DF373B"/>
-          <path d="M43.8571 24.7857H34.2143V15.1429C34.2143 13.9596 33.2547 13 32.0714 13H29.9286C28.7453 13 27.7857 13.9596 27.7857 15.1429V24.7857H18.1429C16.9596 24.7857 16 25.7453 16 26.9286V29.0714C16 30.2547 16.9596 31.2143 18.1429 31.2143H27.7857V40.8571C27.7857 42.0404 28.7453 43 29.9286 43H32.0714C33.2547 43 34.2143 42.0404 34.2143 40.8571V31.2143H43.8571C45.0404 31.2143 46 30.2547 46 29.0714V26.9286C46 25.7453 45.0404 24.7857 43.8571 24.7857Z" fill="white"/>
-        </svg>
+        <AddButton></AddButton>
       </div>
       <span class="new-task">Add new task</span>
     </div>
    <div class="rectangles-categories">
-    <ListCategory :priority="'urgent'" :tasks="tasks"></ListCategory>
-    <ListCategory :priority="'high'" :tasks="tasks"></ListCategory>
-    <ListCategory :priority="'normal'" :tasks="tasks"></ListCategory>
+      <ListCategory :priority="'urgent'" :tasks="tasks"></ListCategory>
+      <ListCategory :priority="'high'" :tasks="tasks"></ListCategory>
+      <ListCategory :priority="'normal'" :tasks="tasks"></ListCategory>
     </div>
-   <!-- <div class="rectangles-categories">
-      
-    <div class="rectangle-color color-red">
-        <div class="rectangle-category">
-          <h2 class="categories-list">Muy Urgente</h2>
-          <DetailsButton path="/"  @click="EmitPriority('veryhigh')"></DetailsButton>
-        </div>
-        <div class="tasks-list">
-          <ul v-for="(task, index) in tasks">
-            <li v-if="task.priority ==='veryhigh'" :key="index">
-              {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
-            </li>
-          </ul>
-        </div>
-      </div>  
-    </div>
-      <div class="rectangle-color color-orange">
-        <div class="rectangle-category">
-          <h2 class="categories-list">Urgente</h2>
-          <DetailsButton path="/"  @click="EmitPriority('high')"></DetailsButton>
-        </div>
-        <div class="tasks-list">
-          <ul v-for="(task, index) in tasks">
-            <li v-if="task.priority ==='high'" :key="index">
-            {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="rectangle-color color-green">
-      <div class="rectangle-category">
-        <h2 class="categories-list">Normal</h2>
-        <DetailsButton path="/" @click="EmitPriority('normal')"></DetailsButton>
-      </div>
-      <div class="tasks-list">
-        <ul v-for="(task, index) in tasks">
-          <li v-if="task.priority ==='normal'" :key="index">
-          {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
-          </li>
-        </ul>
-      </div>
-
    
-          </div>   -->
-      <!--<Carousel>
-        <Slide v-for="slide in 3" :key="slide">
-          <div class="carousel__item">
-            <div class="rectangle-color color-red">
-              <div class="rectangle-category">
-                <h2 class="categories-list">Muy Urgente</h2>
-                <DetailsButton path="/"  @click="EmitPriority('veryhigh')"></DetailsButton>
-              </div>
-              <div class="tasks-list">
-                <ul v-for="(task, index) in tasks">
-                  <li v-if="task.priority ==='veryhigh'" :key="index">
-                    {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
-                  </li>
-                </ul>
-              </div>
-            </div>  
-          </div>
-          <div class="carousel__item">
-            <div class="rectangle-color color-orange">
-              <div class="rectangle-category">
-                <h2 class="categories-list">Urgente</h2>
-                <DetailsButton path="/"  @click="EmitPriority('high')"></DetailsButton>
-              </div>
-              <div class="tasks-list">
-                <ul v-for="(task, index) in tasks">
-                  <li v-if="task.priority ==='high'" :key="index">
-                  {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="carousel__item">
-            <div class="rectangle-color color-green">
-            <div class="rectangle-category">
-              <h2 class="categories-list">Normal</h2>
-              <DetailsButton path="/" @click="EmitPriority('normal')"></DetailsButton>
-            </div>
-            <div class="tasks-list">
-              <ul v-for="(task, index) in tasks">
-                <li v-if="task.priority ==='normal'" :key="index">
-                {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
-                </li>
-              </ul>
-            </div>
-          </div>
-          </div>
-        </Slide>
-
-        <template #addons>
-          <Navigation />
-          <Pagination />
-        </template>
-
-      </Carousel>-->
-
   </main>
   
 </template>

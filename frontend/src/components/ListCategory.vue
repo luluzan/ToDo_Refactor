@@ -32,7 +32,6 @@ console.log(props.tasks);
             <StatusSelector :id="task.id" :status="task.status"></StatusSelector>
             {{ task.title }} - {{ task.priority }} - {{ task.dueDate }}
           </li>
-                   
         </ul>
       </div>
     </div>

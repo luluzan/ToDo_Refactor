@@ -34,7 +34,6 @@ const priority = ref('')
 
 onBeforeMount(async () => {
   const task = await getTasks.getTaskById(id)
-  
   title.value = task.data.title
   description.value = task.data.description
   category.value = task.data.category
