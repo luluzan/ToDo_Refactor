@@ -20,7 +20,7 @@ onUpdated(() => {
           
           <option value="high">Alta Prioridad</option>
 
-          <option value="veryHigh">Urgente</option>
+          <option value="urgent">Urgente</option>
           </select
         >
       </div>

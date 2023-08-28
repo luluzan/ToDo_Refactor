@@ -49,7 +49,7 @@ class	ApiConnection
 		try 
 		{
 			let	response = await axios.post(url, task);
-			// let	response = await axios.post(url + '/' + task.id);
+			// let	response = await axios.post(url + '/', task);
 			return (response);
 		} 
 		catch (error) 
@@ -63,6 +63,7 @@ class	ApiConnection
 		try 
 		{
 			let	response = await axios.put(`${url}/${id}`, task);
+			
 			return (response);
 		} 
 		catch (error) 

@@ -8,22 +8,14 @@ import { ref, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 
 
-
-const props = defineProps({
-  title: {
-    type: String,
-  },
-  
-});
-
 const route = useRoute();
-const id = 11;
+const id = 12;
 // const id = route.params.id;
 
 const taskText = ref('')
 
 const editedTask = ref({
-  id: id,
+  id: '',
   title: '',
   description: '',
   dueDate: '',
@@ -33,17 +25,31 @@ const editedTask = ref({
 })
 
 const getTasks = new ApiConnection();
+const title = ref('')
+const description = ref('')
+const category = ref('')
+const dueDate = ref('')
+const priority = ref('')
 
 onBeforeMount(async () => {
   const task = await getTasks.getTaskById(id)
-  const title = task.data.title
+  
+  title.value = task.data.title
+  description.value = task.data.description
+  category.value = task.data.category
+  dueDate.value = task.data.dueDate
+  priority.value = task.data.priority
+  editedTask.value.id = id
+
   console.log(task);
-  console.log(title);
+  console.log(id);
+  console.log(dueDate.value);
+  console.log(priority.value);
+  
 })
 
 const submit = async () => {
-  task.data.status = !task.data.status;
-  await getTasks.updateTask(task.id, task.data)
+  await getTasks.updateTask(editedTask.value.id, editedTask.value)
 }
 
 </script>
@@ -56,15 +62,15 @@ const submit = async () => {
       <CloseButton path="/"/>
 
       <h4>Task</h4>
-      <input v-model="task.data.title" id="taskText" type="text" :placeholder="title" required="true"/>
+      <input v-model="editedTask.title" id="taskText" type="text" :placeholder="title" required="true"/>
 
       <h4>Description (Optional)</h4>
-      <input v-model="editedTask.description" id="descriptionText" type="text" placeholder="Enter Description" />
+      <input v-model="editedTask.description" id="descriptionText" type="text" :placeholder="description" />
       
       <h4>Category (Optional)</h4>
-      <input v-model="editedTask.category" id="categoryText" type="text" placeholder="Enter Category">
+      <input v-model="editedTask.category" id="categoryText" type="text" :placeholder="category">
       <div>
-        <CompleteButton @change="submit()" fill="#FF9E13" />
+        <CompleteButton @click="submit()" fill="#FF9E13" />
       </div>
     </div>
 
@@ -86,11 +92,11 @@ const submit = async () => {
 
         <div class="dueDateContent">
           <h3 id="dueDateTitle">Due Date</h3>
-          <Calendar @date="(date) => newTask.dueDate = date"/>
+          <Calendar @date="(date) => editedTask.dueDate = date" />
+            <button >Current due date: {{ dueDate }}</button>
         </div>
       </div>
 
-      <p>This field is required</p>
       <div class="priorityContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +113,8 @@ const submit = async () => {
         </svg>
         <div class="priorityContent">
           <h3 id="priorityContentTitle">Priority</h3>
-          <PriorityDropdown @priority="(priority) => newTask.priority = priority"/>
+          <PriorityDropdown :value="priority" @priority="(priority) => editedTask.priority = priority"/>
+            <button>Current priority: {{ priority }}</button>
         </div>
       </div>
     </div> 
@@ -146,6 +153,7 @@ h4 {
   color: #FF9E13;
   margin: 1rem 0;
 }
+
 
 input {
   background-color: #dd4b39;
