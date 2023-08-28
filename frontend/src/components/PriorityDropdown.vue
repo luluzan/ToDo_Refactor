@@ -12,7 +12,7 @@ onUpdated(() => {
 
 <template>
     <div class="dropdown">
-        <select v-model="priority"
+        <select selected="normal" v-model="priority"
           class="select-dropdown"
         >
           

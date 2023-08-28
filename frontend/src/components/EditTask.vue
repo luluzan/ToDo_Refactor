@@ -10,7 +10,7 @@ import { useRoute } from 'vue-router';
 
 
 const route = useRoute();
-const id = 12;
+const id = 10;
 // const id = route.params.id;
 
 const taskText = ref('')
@@ -46,6 +46,7 @@ onBeforeMount(async () => {
 
 const submit = async () => {
   await getTasks.updateTask(editedTask.value.id, editedTask.value)
+  console.log("Task updated");
 }
 
 const deleteTask = async () => {
