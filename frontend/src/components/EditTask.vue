@@ -4,7 +4,7 @@ import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
 import CloseButton from '../components/CloseButton.vue'
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 
 
@@ -17,11 +17,12 @@ const props = defineProps({
 });
 
 const route = useRoute();
-const id = route.params.id;
+const id = 11;
+// const id = route.params.id;
 
 const taskText = ref('')
 
-const newTask = ref({
+const editedTask = ref({
   id: id,
   title: '',
   description: '',
@@ -35,12 +36,14 @@ const getTasks = new ApiConnection();
 
 onBeforeMount(async () => {
   const task = await getTasks.getTaskById(id)
+  const title = task.data.title
+  console.log(task);
+  console.log(title);
 })
 
 const submit = async () => {
-  
   task.data.status = !task.data.status;
-  await getTasks.updateTask(props.id, task.data)
+  await getTasks.updateTask(task.id, task.data)
 }
 
 </script>
@@ -53,13 +56,13 @@ const submit = async () => {
       <CloseButton path="/"/>
 
       <h4>Task</h4>
-      <input v-model="newTask.title" id="taskText" type="text" placeholder="Enter Task" required="true"/>
+      <input v-model="task.data.title" id="taskText" type="text" :placeholder="title" required="true"/>
 
       <h4>Description (Optional)</h4>
-      <input v-model="newTask.description" id="descriptionText" type="text" placeholder="Enter Description" />
+      <input v-model="editedTask.description" id="descriptionText" type="text" placeholder="Enter Description" />
       
       <h4>Category (Optional)</h4>
-      <input v-model="newTask.category" id="categoryText" type="text" placeholder="Enter Category">
+      <input v-model="editedTask.category" id="categoryText" type="text" placeholder="Enter Category">
       <div>
         <CompleteButton @change="submit()" fill="#FF9E13" />
       </div>
