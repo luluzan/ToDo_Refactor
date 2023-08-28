@@ -4,6 +4,7 @@ import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
 import CloseButton from '../components/CloseButton.vue'
+import DeleteButton from '../components/DeleteButton.vue'
 import { ref, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -40,16 +41,16 @@ onBeforeMount(async () => {
   dueDate.value = task.data.dueDate
   priority.value = task.data.priority
   editedTask.value.id = id
-
-  console.log(task);
-  console.log(id);
-  console.log(dueDate.value);
-  console.log(priority.value);
   
 })
 
 const submit = async () => {
   await getTasks.updateTask(editedTask.value.id, editedTask.value)
+}
+
+const deleteTask = async () => {
+  await getTasks.deleteTaskById(editedTask.value.id)
+  console.log("Task deleted");
 }
 
 </script>
@@ -116,6 +117,11 @@ const submit = async () => {
           <PriorityDropdown :value="priority" @priority="(priority) => editedTask.priority = priority"/>
             <button>Current priority: {{ priority }}</button>
         </div>
+
+       
+      </div>
+      <div>
+        <DeleteButton @click="deleteTask()"/>
       </div>
     </div> 
   </main>
