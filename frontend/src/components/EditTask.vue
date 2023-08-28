@@ -4,15 +4,20 @@ import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
 import CloseButton from '../components/CloseButton.vue'
-import { ref, onUpdated } from 'vue';
-const id = 10
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+
 
 
 const props = defineProps({
   title: {
     type: String,
-  }
+  },
+  
 });
+
+const route = useRoute();
+const id = route.params.id;
 
 const taskText = ref('')
 
@@ -26,12 +31,14 @@ const newTask = ref({
   category: ''
 })
 
-const addTask = new ApiConnection();
+const getTasks = new ApiConnection();
 
 
 const submit = async () => {
-  await addTask.addTask(newTask.value)
-  console.log(newTask);
+  const task = await getTasks.getTaskById(props.id)
+
+  task.data.status = !task.data.status;
+  await getTasks.updateTask(props.id, task.data)
 }
 
 </script>
@@ -49,7 +56,7 @@ const submit = async () => {
       <h4>Description (Optional)</h4>
       <input v-model="newTask.description" id="descriptionText" type="text" placeholder="Enter Description" />
       <div>
-        <CompleteButton @click="submit()" fill="#FF9E13" />
+        <CompleteButton @change="submit()" fill="#FF9E13" />
       </div>
     </div>
 
