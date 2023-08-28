@@ -13,27 +13,27 @@ public class ToDosController{
     @Autowired
     private ToDosServices toDosServices;
 
-    @GetMapping(path = "/list")
+    @GetMapping
     public ArrayList<ToDo> getAllTasks() {
         return toDosServices.getAllTasks();
     }
 
-    @GetMapping(path = "/list/{id}")
+    @GetMapping(path = "/{id}")
     public ToDo getTaskById(@PathVariable long id) {
         return toDosServices.getTaskById(id);
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/{id}")
     public String deleteTask(@PathVariable long id) {
         return toDosServices.deleteTask(id);
     }
 
-    @PostMapping(path = "/add")
+    @PostMapping(path = "/")
     public String saveTask(@RequestBody ToDo toDo) {
         return (toDosServices.saveTask(toDo));
     }
 
-    @PutMapping(path = "/update/{id}")
+    @PutMapping(path = "/{id}")
     public String updateTask (@PathVariable long id, @RequestBody ToDo toDo) {
         toDo.setId(id);
         return (toDosServices.updateTask(toDo));
