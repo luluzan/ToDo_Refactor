@@ -5,7 +5,7 @@
       "title": "walk the dog",
       "description": "",
       "dueDate": 2024,
-      "status": false,
+      "status": true,
       "priority": "normal"
     },
     {
@@ -34,6 +34,30 @@
       "dueDate": "2023.08.25",
       "priority": "normal",
       "category": ""
+    },
+    {
+      "id": 4,
+      "title": "walk the dog",
+      "description": "",
+      "dueDate": 2024,
+      "status": true,
+      "priority": "normal"
+    },
+    {
+      "id": 5,
+      "title": "eat a lot",
+      "description": "",
+      "dueDate": 2023,
+      "status": true,
+      "priority": "normal"
+    },
+    {
+      "id": 6,
+      "title": "sleep",
+      "description": "",
+      "dueDate": 2025,
+      "status": false,
+      "priority": "urgent"
     }
   ]
 }
