@@ -72,4 +72,4 @@ class   ApiConnection
     }
 }
 
-export default new ApiConnection();
+export default ApiConnection;
