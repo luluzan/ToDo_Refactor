@@ -1,5 +1,5 @@
 <script setup>
-import getTasks from '../services/ApiConnection'
+import ApiConnection from '../services/ApiConnection'
 import PriorityDropdown from '../components/PriorityDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
@@ -10,7 +10,7 @@ import { useRoute } from 'vue-router';
 
 
 const route = useRoute();
-// const id = 10;
+// const id = 19;
 const id = route.params.id;
 
 const taskText = ref('')
@@ -25,7 +25,7 @@ const editedTask = ref({
   category: ''
 })
 
-// const getTasks = new ApiConnection();
+const getTasks = new ApiConnection();
 const title = ref('')
 const description = ref('')
 const category = ref('')

@@ -88,7 +88,6 @@ const submit = async () => {
         </div>
       </div>
 
-      <p>This field is required</p>
       <div class="priorityContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
