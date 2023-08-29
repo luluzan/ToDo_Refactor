@@ -1,8 +1,6 @@
 <script setup>
 import ApiConnection from '../services/ApiConnection';
 import ListCategory from "./ListCategory.vue";
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-import 'vue3-carousel/dist/carousel.css'
 import { ref, onBeforeMount } from 'vue';
 import AddButton from './AddButton.vue';
 
@@ -19,6 +17,7 @@ function getAllTasks() {
       const orderByDate = new Date(a.dueDate).getDate() - new Date(b.dueDate).getDate();
       return (orderByPriority === 0 ? orderByDate : orderByPriority);
     }));
+    
     console.table(response.data);
   })
   .catch(e => {
@@ -48,9 +47,9 @@ onBeforeMount(() => {
       <span class="new-task">Add new task</span>
     </div>
    <div class="rectangles-categories">
-      <ListCategory :priority="'urgent'" :tasks="tasks"></ListCategory>
-      <ListCategory :priority="'high'" :tasks="tasks"></ListCategory>
-      <ListCategory :priority="'normal'" :tasks="tasks"></ListCategory>
+      <ListCategory :priority="'urgent'" :title="'Urgent'" :tasks="tasks"></ListCategory>
+      <ListCategory :priority="'high'" :title="'High'" :tasks="tasks"></ListCategory>
+      <ListCategory :priority="'normal'" :title="'Normal'" :tasks="tasks"></ListCategory>
     </div>
    
   </main>
@@ -76,7 +75,7 @@ header{
   justify-content: center;
   align-items: center;
   height: 6.25rem;
-  background: rgba(220, 38, 38, 1);
+  background: rgba(221, 75, 57, 1);
 }
 
 h1{
@@ -84,7 +83,7 @@ h1{
   color:rgba(255, 255, 255, 1);
 }
 .new-task{
-  color: rgba(255, 0, 0, 1);
+  color: rgba(0, 0, 0, 1);
   font: capitalize 400 1rem normal "Inter";
   margin-top: 1rem;
 }
@@ -117,87 +116,5 @@ h1{
   align-items: center;
   width: auto;
 }
-
-.carousel__item {
-  min-height: 200px;
-  width: 100%;
-  font-size: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.carousel__slide {
-  padding: 10px;
-}
-
-.carousel__prev,
-.carousel__next {
-  box-sizing: content-box;
-  border: 5px solid white;
-}
-
-/*
-.rectangle-color{
-  margin-top:3.5rem;
-  background-color: rgba(58, 47, 132, 1);
-  width: 21.5rem;
-  border:rgba(58, 47, 132, 1) solid 0.0625rem;
-  border-radius:0.7rem;
-}
-
-.color-red{
-  background-color:red;
-  border-color:red;
-}
-
-.color-orange{
-  background-color:orangered;
-  border-color:orangered;
-}
-
-.color-green{
-  background-color:green;
-  border-color:green;
-}
-
-.rectangle-category{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: center;
-  border-bottom: rgba(245, 245, 245, 1) solid 0.0955rem;
-  height: 4rem;
-}
-
-.categories-list{
-  display:flex;
-  flex-direction:row;
-  flex-wrap:wrap;
-  justify-content: center;
-  padding:0.05rem;
-  font: normal 700 0.8rem "Inter";
-  color:rgba(255, 255, 255, 1);
-  line-height: normal;
-  margin-right: 0.8rem;
-}
-
-ul {
-  list-style: none;
-  margin-top:0.9rem;
-}
-
-li{
-  color: #FFF;
-  font-family: normal 700 1.25rem "Inter";
-  display:flex;
-  flex-wrap:wrap;
-  justify-content: center;
-  padding-left:0;
-  padding-right:0.25rem;
-}
-*/
 
 </style>
