@@ -17,8 +17,6 @@ function getAllTasks() {
       const orderByDate = new Date(a.dueDate).getDate() - new Date(b.dueDate).getDate();
       return (orderByPriority === 0 ? orderByDate : orderByPriority);
     }));
-    
-    console.table(response.data);
   })
   .catch(e => {
     console.log(e);
@@ -114,7 +112,7 @@ h1{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: auto;
+  width: 100%;
 }
 
 </style>

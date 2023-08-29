@@ -9,7 +9,6 @@ class   ApiConnection
         try 
         {
             let response = await axios.get(url);
-            console.log(response);
             return (response);
         } 
         catch (error) 
@@ -22,7 +21,6 @@ class   ApiConnection
 		try 
 		{
 			let response = await axios.get(url);
-			console.log(response);
 			return (response);
 			
 		} 
@@ -88,7 +86,6 @@ class   ApiConnection
         try 
         {
             let response = await axios.put(`${url}/${id}`, task);
-            
             return (response);
         } 
         catch (error) 

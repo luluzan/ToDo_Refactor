@@ -5,7 +5,7 @@ import TaskListPriority from '../components/TaskListPriority.vue';
 
 const	route = useRoute();
 const	priority = route.params.priority;
-console.log(priority);
+
 </script>
 
 <template>
