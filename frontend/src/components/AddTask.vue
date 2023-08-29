@@ -37,6 +37,7 @@ const isAllFieldsFilled = computed(() => {
 const submit = async () => {
   if (isAllFieldsFilled.value) {
     await addTask.addTask(newTask.value);
+    alert('Added new task')
     console.log(newTask);
   } else {
     console.log('Please fill in all required fields.');

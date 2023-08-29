@@ -12,15 +12,15 @@ onUpdated(() => {
 
 <template>
     <div class="dropdown">
-        <select selected="normal" v-model="priority"
+        <select v-model="priority"
           class="select-dropdown"
         >
           
           <option value="normal">Normal</option>
           
-          <option value="high">Alta Prioridad</option>
+          <option value="high">High</option>
 
-          <option value="urgent">Urgente</option>
+          <option value="urgent">Urgent</option>
           </select
         >
       </div>
