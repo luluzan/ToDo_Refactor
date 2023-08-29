@@ -37,7 +37,6 @@ const isAllFieldsFilled = computed(() => {
 const submit = async () => {
   if (isAllFieldsFilled.value) {
     await addTask.addTask(newTask.value);
-    alert('Added new task')
     console.log(newTask);
   } else {
     console.log('Please fill in all required fields.');
@@ -49,9 +48,9 @@ const submit = async () => {
 <template>
   <main class="mainContainer">
     <div id="top">
-      <h2 class="addTaskTitle">Add Task</h2>
+      <CloseButton path="/" class="closeBtn"/>
 
-      <CloseButton path="/"/>
+      <h2 class="addTaskTitle">Add Task</h2>
 
       <h4>Task</h4>
       <input v-model="newTask.title" id="taskText" type="text" placeholder="Enter Task" required="true"/>
@@ -61,11 +60,11 @@ const submit = async () => {
 
       <h4>Category (Optional)</h4>
       <input v-model="newTask.category" id="categoryText" type="text" placeholder="Enter Category">
-      <div>
-        <CompleteButton @click="submit()" :fill="isAllFieldsFilled ? '#FF9E13' : '#565656'" />
-      </div>
+      
     </div>
-
+    <div>
+      <CompleteButton class="completeBtn" @click="submit()" :fill="isAllFieldsFilled ? '#FF9E13' : '#565656'" />
+    </div>
     <div id="bottom">
       <div class="dueDateContainer">
         <svg
@@ -84,10 +83,11 @@ const submit = async () => {
 
         <div class="dueDateContent">
           <h3 id="dueDateTitle">Due Date</h3>
-          <Calendar @date="(date) => newTask.dueDate = date"/>
+          <Calendar class="calendar" @date="(date) => newTask.dueDate = date"/>
         </div>
       </div>
 
+      <p>This field is required</p>
       <div class="priorityContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +104,7 @@ const submit = async () => {
         </svg>
         <div class="priorityContent">
           <h3 id="priorityContentTitle">Priority</h3>
-          <PriorityDropdown @priority="(priority) => newTask.priority = priority"/>
+          <PriorityDropdown class="select-dropdown" @priority="(priority) => newTask.priority = priority"/>
         </div>
       </div>
     </div> 
@@ -113,18 +113,20 @@ const submit = async () => {
 
 <style scoped>
 .mainContainer {
-  width: 26.875rem;
-  height: 58.25rem;
+  /*width: 26.875rem;
+  height: 58.25rem;*/
+  /*width:fit-content;*/
+  height: 100vh;
   overflow: hidden;
   background: var(--vt-c-white-soft);
 }
 
 #top {
-  width: 26.875rem;
-  height: 20.5625rem;
+  /*width: 26.875rem;*/
+  height: 40vh;
   background: #dd4b39;
   flex-shrink: 0;
-  padding: 30px 20px 0;
+  padding: 30px 20px;
 }
 
 .addTaskTitle {
@@ -133,7 +135,9 @@ const submit = async () => {
   text-align: center;
 }
 
-
+.closeBtn {
+  margin-left: 97%;
+}
 
 h3 {
   font-weight: 700;
@@ -151,6 +155,7 @@ input {
   padding: 5px;
   color: #ffffff;
   font-size: 1.2rem;
+  width: 45vmin;
 }
 
 input:focus {
@@ -178,7 +183,7 @@ input:focus {
 .dueDateContainer {
   display: flex;
   align-items: center;
-  margin: 60px 0 0 20px;
+  margin: 0 0 0 20px;
 }
 
 .calendarIcon {
@@ -194,7 +199,6 @@ input:focus {
 }
 
 .calendar {
-  width: fit-content;
   margin-top: 10px;
 }
 
@@ -225,5 +229,29 @@ p {
 
 #priorityContentTitle {
   margin-right: 20px;
+}
+
+@media (min-width: 368px) {
+  .completeBtn {
+    margin: -40px 0 0 75%;
+  }
+}
+
+@media (min-width: 568px) {
+  .completeBtn {
+    margin: -40px 0 0 80%;
+  }
+}
+
+@media (min-width: 768px) {
+    .completeBtn {
+      margin: -40px 0 0 85%;
+    }
+  }
+
+@media (min-width: 1024px) {
+  .completeBtn {
+    margin: -40px 0 0 90%;
+  }
 }
 </style>

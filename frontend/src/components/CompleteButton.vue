@@ -25,9 +25,6 @@ const props = defineProps({
 
 <style scoped>
 .completeBtn {
-  position: absolute;
-  top: 340px;
-  left: 350px;
   cursor: pointer;
 }
 </style>
