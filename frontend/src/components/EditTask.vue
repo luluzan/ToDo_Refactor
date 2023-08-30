@@ -124,6 +124,7 @@ const deleteTask = async () => {
 #top {
   background: #dd4b39;
   padding: 0.4rem 2rem;
+  border-radius: 0.6rem;
 }
 
 .edit-task-title {
