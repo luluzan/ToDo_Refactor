@@ -9,7 +9,7 @@ const props = defineProps({
 <template>
   <router-link :to="path">
     <svg
-      class="closeBtn"
+      class="close-btn"
       xmlns="http://www.w3.org/2000/svg"
       width="15"
       height="15"
@@ -25,4 +25,7 @@ const props = defineProps({
 </template>
 
 <style scoped>
+.close-btn {
+  margin-left: 97%;
+}
 </style>

@@ -13,7 +13,7 @@ const props = defineProps({
           height="80"
           viewBox="0 0 80 80"
           fill="none"
-          class="completeBtn"
+          class="complete-btn"
         >
           <circle cx="40" cy="40" r="40" :fill="fill" />
           <path
@@ -24,7 +24,31 @@ const props = defineProps({
 </template>
 
 <style scoped>
-.completeBtn {
+.complete-btn {
   cursor: pointer;
+}
+
+@media (min-width: 368px) {
+  .complete-btn {
+    margin: -40px 0 0 75%;
+  }
+}
+
+@media (min-width: 568px) {
+  .complete-btn {
+    margin: -40px 0 0 80%;
+  }
+}
+
+@media (min-width: 768px) {
+    .complete-btn {
+      margin: -40px 0 0 85%;
+    }
+  }
+
+@media (min-width: 1024px) {
+  .complete-btn {
+    margin: -40px 0 0 90%;
+  }
 }
 </style>
