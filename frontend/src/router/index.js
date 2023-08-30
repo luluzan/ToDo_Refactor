@@ -24,7 +24,7 @@ const router = createRouter({
       component: EditView
     },
 	{
-		path: '/list/:priority',
+		path: '/list/:priority/:modal*',
 		name: 'TaskList',
 		component: TaskListView
 	}

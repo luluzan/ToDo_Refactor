@@ -5,6 +5,7 @@ import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from "./Calendar.vue";
 import CloseButton from '../components/CloseButton.vue'
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   title: {
@@ -13,6 +14,7 @@ const props = defineProps({
 });
 
 const id = ref()
+const router = useRouter();
 
 const newTask = ref({
   id: null,
@@ -37,7 +39,7 @@ const isAllFieldsFilled = computed(() => {
 const submit = async () => {
   if (isAllFieldsFilled.value) {
     await addTask.addTask(newTask.value);
-    alert("New task created")
+	router.push({name: 'TaskList', params: {priority: newTask.value.priority, modal: true}});
   } else {
     alert('Please fill in all required fields.')
   }

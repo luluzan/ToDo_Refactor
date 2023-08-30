@@ -4,6 +4,7 @@ import GetTasks from '../services/ApiConnection'
 import TaskSelection from './TaskSelection.vue'
 import AddButton from './AddButton.vue'
 import CloseButton from './CloseButton.vue'
+import Modal from './Modal.vue';
 
 const	props = defineProps
 (
@@ -12,18 +13,25 @@ const	props = defineProps
 		{
 			type: String,
 			default: "normal"
+		},
+		modal:
+		{
+			type: Boolean,
+			default: false,
 		}
 	}
 )
 
 const	tasks = ref([]);
 const	getTasks = new GetTasks();
+const	showModal = ref(false);
 
 
 onBeforeMount( async() => 
 {
- const taskData = await getTasks.getAllTasks();
- tasks.value = taskData.data.filter(task => task.priority === props.priority);
+	console.log(props.modal);
+	const taskData = await getTasks.getAllTasks();
+	tasks.value = taskData.data.filter(task => task.priority === props.priority);
 }
 )
 
@@ -51,6 +59,13 @@ onBeforeMount( async() =>
 			<AddButton />
 		</article>
 	</main>
+	<Teleport to="body">
+    <modal :show="showModal" @close="showModal = false">
+      <template #header>
+        <h3>custom header</h3>
+      </template>
+    </modal>
+  </Teleport>
 </template>
 
 <style scoped>
