@@ -40,95 +40,74 @@ onBeforeMount(async () => {
 
 const submit = async () => {
   await getTasks.updateTask(editedTask.value.id, editedTask.value);
-  router.push({name: 'TaskList', params: {priority: editedTask.value.priority, modal: true, action: "updated"}});
+  router.push({
+    name: "TaskList",
+    params: {
+      priority: editedTask.value.priority,
+      modal: true,
+      action: "updated",
+    },
+  });
 };
 
 const deleteTask = async () => {
   await getTasks.deleteTaskById(editedTask.value.id);
-  router.push({name: 'TaskList', params: {priority: currentPriority.value, modal: true, action: "deleted"}});
+  router.push({
+    name: "TaskList",
+    params: { priority: currentPriority.value, modal: true, action: "deleted" },
+  });
 };
 </script>
 
 <template>
   <main class="main-container">
     <div id="top">
-      <CloseButton path="/" fill="white" />
+      <CloseButton path="/" fill="white" id="close-button"/>
       <h2 class="edit-task-title">Edit Task</h2>
       <h4>Task</h4>
-      <input
-        v-model="editedTask.title"
-        id="task-text"
-        type="text"
-        :placeholder="editedTask.title"
-        required="true"
-      />
+      <input v-model="editedTask.title" id="task-text" type="text" :placeholder="editedTask.title" required="true" />
 
       <h4>Description (Optional)</h4>
-      <input
-        v-model="editedTask.description"
-        id="description-text"
-        type="text"
-        :placeholder="editedTask.description"
-      />
+      <input v-model="editedTask.description" id="description-text" type="text" :placeholder="editedTask.description" />
 
       <h4>Category (Optional)</h4>
-      <input
-        v-model="editedTask.category"
-        id="category-text"
-        type="text"
-        :placeholder="editedTask.category"
-      />
+      <input v-model="editedTask.category" id="category-text" type="text" :placeholder="editedTask.category" />
     </div>
     <div>
       <CompleteButton @click="submit()" fill="#FF9E13" />
     </div>
 
-      <div id="bottom">
-        <div class="due-date-container">
-          <div class="due-date-content">
-            <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="23"
-            viewBox="0 0 20 23"
-            fill="none"
-            class="calendar-icon"
-          >
+    <div id="bottom">
+      <div class="due-date-container">
+        <div class="due-date-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23" fill="none"
+            class="calendar-icon">
             <path
               d="M17.8571 2.85714H15.7143V0.535714C15.7143 0.241071 15.4732 0 15.1786 0H13.3929C13.0982 0 12.8571 0.241071 12.8571 0.535714V2.85714H7.14286V0.535714C7.14286 0.241071 6.90179 0 6.60714 0H4.82143C4.52679 0 4.28571 0.241071 4.28571 0.535714V2.85714H2.14286C0.959821 2.85714 0 3.81696 0 5V20.7143C0 21.8973 0.959821 22.8571 2.14286 22.8571H17.8571C19.0402 22.8571 20 21.8973 20 20.7143V5C20 3.81696 19.0402 2.85714 17.8571 2.85714ZM17.5893 20.7143H2.41071C2.26339 20.7143 2.14286 20.5938 2.14286 20.4464V7.14286H17.8571V20.4464C17.8571 20.5938 17.7366 20.7143 17.5893 20.7143Z"
-              fill="black"
-            />
+              fill="black" />
           </svg>
-            <h3 id="due-date-title">Due Date</h3>
-            <Calendar @date="(date) => (editedTask.dueDate = date)" />
-            <button>Current due date: {{ currentDate }}</button>
-          </div>
-        </div>
-
-        <div class="priority-container">
-          <div class="priority-content">
-            <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="5"
-            height="16"
-            viewBox="0 0 5 16"
-            fill="none"
-            class="priority-icon"
-          >
-            <path
-              d="M5 13.5C5 14.8785 3.8785 16 2.5 16C1.1215 16 0 14.8785 0 13.5C0 12.1215 1.1215 11 2.5 11C3.8785 11 5 12.1215 5 13.5ZM0.289375 0.787469L0.714375 9.28747C0.734344 9.68663 1.06378 10 1.46344 10H3.53656C3.93622 10 4.26566 9.68663 4.28562 9.28747L4.71063 0.787469C4.73203 0.359062 4.3905 0 3.96156 0H1.03844C0.6095 0 0.267969 0.359062 0.289375 0.787469Z"
-              fill="black"
-            />
-          </svg>
-            <h3 id="priority-content-title">Priority</h3>
-            <PriorityDropdown
-              @priority="(priority) => (editedTask.priority = priority)"
-            />
-            <button>Current priority: {{ currentPriority }}</button>
-          </div>
+          <h3 id="due-date-title">Due Date</h3>
+          <Calendar @date="(date) => (editedTask.dueDate = date)" />
+          <button>Current due date: {{ currentDate }}</button>
         </div>
       </div>
-    
+
+      <div class="priority-container">
+        <div class="priority-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 5 16" fill="none"
+            class="priority-icon">
+            <path
+              d="M5 13.5C5 14.8785 3.8785 16 2.5 16C1.1215 16 0 14.8785 0 13.5C0 12.1215 1.1215 11 2.5 11C3.8785 11 5 12.1215 5 13.5ZM0.289375 0.787469L0.714375 9.28747C0.734344 9.68663 1.06378 10 1.46344 10H3.53656C3.93622 10 4.26566 9.68663 4.28562 9.28747L4.71063 0.787469C4.73203 0.359062 4.3905 0 3.96156 0H1.03844C0.6095 0 0.267969 0.359062 0.289375 0.787469Z"
+              fill="black" />
+          </svg>
+          <h3 id="priority-content-title">Priority</h3>
+        </div>
+        <PriorityDropdown @priority="(priority) => (editedTask.priority = priority)" />
+
+        <button>Current priority: {{ currentPriority }}</button>
+      </div>
+    </div>
+
     <div>
       <DeleteButton @click="deleteTask()" />
     </div>
@@ -136,7 +115,6 @@ const deleteTask = async () => {
 </template>
 
 <style scoped>
-
 .main-container {
   overflow: hidden;
   background: var(--vt-c-white-soft);
@@ -152,24 +130,24 @@ const deleteTask = async () => {
   color: var(--vt-c-white);
   margin: 0;
   text-align: center;
-  font-size:1.2rem;
+  font-size: 1.2rem;
 }
 
 h3 {
   font-weight: 700;
-  font-size:1.2rem;
+  font-size: 1.2rem;
 }
 
 h4 {
-  color: #FF9E13;
+  color: #ff9e13;
   margin: 1rem 0;
-  font-size:1.2rem;
+  font-size: 1.2rem;
 }
 
 input {
   background-color: #dd4b39;
   border: none;
-  border-bottom: 0.1rem solid #FF9E13;
+  border-bottom: 0.1rem solid #ff9e13;
   padding: 0.5rem;
   color: #ffffff;
   font-size: 1.2rem;
@@ -178,7 +156,7 @@ input {
 
 input:focus {
   border: 0.2rem solid white;
-  outline: 0.2rem solid #FF9E13;
+  outline: 0.2rem solid #ff9e13;
   border-color: white;
   color: var(--vt-c-white);
 }
@@ -211,18 +189,14 @@ input:focus {
 }
 
 .due-date-content {
-  display:flex;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.calendar {
-  margin-top: 1rem;
-}
-
 p {
-  padding: 0.5rem 0 0 7rem; 
+  padding: 0.5rem 0 0 7rem;
   color: #dd4b39;
   font-style: italic;
 }
@@ -231,6 +205,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 0.5rem;
 }
 
 .priority-icon {
@@ -239,9 +214,6 @@ p {
   height: 1.5rem;
 }
 
-#priority-content-title{
-  margin-bottom: 1.2rem;
-}
 .priority-content {
   display: flex;
   flex-direction: row;
@@ -255,13 +227,24 @@ p {
 }
 
 @media (max-width: 648px) {
-  #bottom{
-    display:flex;
+  #bottom {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap:3rem;
+    gap: 3rem;
     margin-left: 1rem;
   }
 }
 
+button {
+  border-radius: 10px;
+  border: 0.1rem solid #cacaca;
+  padding: 0.5rem;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#close-button {
+  padding-top: 5rem;
+}
 </style>

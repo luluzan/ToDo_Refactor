@@ -28,7 +28,13 @@ const props = defineProps({
 </template>
 
 <style scoped>
+
+template {
+  font-size: 62.5%;
+}
+
 .close-btn {
   margin-left: 97%;
+  margin-top: 1rem;
 }
 </style>
