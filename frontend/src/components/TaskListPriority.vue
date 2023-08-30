@@ -20,10 +20,17 @@ const	props = defineProps
 const	tasks = ref([]);
 const	getTasks = new GetTasks();
 
+// onBeforeMount( async() => 
+// {
+// 	const taskData = await getTasks.getAllTasks();
+// 	tasks.value = taskData.data.filter(task => task.priority === props.priority);
+// }
+// )
+
 onBeforeMount( async() => 
 {
-	const taskData = await getTasks.getAllTasks();
-	tasks.value = taskData.data.filter(task => task.priority === props.priority);
+ const taskData = await getTasks.getAllTasks();
+ tasks.value = taskData.data.filter(task => task.priority === props.priority);
 }
 )
 
@@ -32,7 +39,7 @@ onBeforeMount( async() =>
 <template>
 	<main class="task-list-layout">
 		<header class="task-list-header">
-			<CloseButton path="/" />
+			<CloseButton path="/" fill="black"/>
 		</header>
 		<section class = "list">
 			<article class="title">

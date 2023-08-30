@@ -10,7 +10,7 @@ import { useRoute } from 'vue-router';
 
 
 const route = useRoute();
-//const id = 12;
+// const id = 19;
 const id = route.params.id;
 
 const taskText = ref('')
@@ -45,10 +45,13 @@ onBeforeMount(async () => {
 
 const submit = async () => {
   await getTasks.updateTask(editedTask.value.id, editedTask.value)
+  alert('Task updated')
+  console.log("Task updated");
 }
 
 const deleteTask = async () => {
   await getTasks.deleteTaskById(editedTask.value.id)
+  alert('Task deleted')
   console.log("Task deleted");
 }
 
@@ -59,7 +62,7 @@ const deleteTask = async () => {
     <div id="top">
       <h2 class="editTaskTitle">Edit Task</h2>
 
-      <CloseButton path="/"/>
+      <CloseButton path="/" fill="white"/>
 
       <h4>Task</h4>
       <input v-model="editedTask.title" id="taskText" type="text" :placeholder="title" required="true"/>

@@ -18,9 +18,9 @@ onUpdated(() => {
           
           <option value="normal">Normal</option>
           
-          <option value="high">Alta Prioridad</option>
+          <option value="high">High</option>
 
-          <option value="urgent">Urgente</option>
+          <option value="urgent">Urgent</option>
           </select
         >
       </div>
