@@ -84,7 +84,7 @@ const submit = async () => {
           />
         </svg>
           <h3 id="dueDateTitle">Due Date</h3>
-          <Calendar class="calendar" @date="(date) => newTask.dueDate = date"/>
+          <Calendar class="calendar" @date="(date) => (newTask.dueDate = date)"/>
         </div>
       </div>
 
@@ -116,11 +116,13 @@ const submit = async () => {
   overflow: hidden;
   background: var(--vt-c-white-soft);
   font-size: 62.5%;
+  height: 91vh;
 }
 
 #top {
   background: #dd4b39;
   padding: 0.4rem 2rem;
+  border-radius: 0.6rem;
 }
 
 .add-task-title {
@@ -194,6 +196,7 @@ input:focus {
 
 .calendar {
   margin-top: 1rem;
+  margin-bottom: 20px;
 }
 
 p {
