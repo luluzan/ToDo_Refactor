@@ -39,7 +39,6 @@ onBeforeMount(async () => {
 });
 
 const submit = async () => {
-	console.log(editedTask.value);
   await getTasks.updateTask(editedTask.value.id, editedTask.value);
   router.push({name: 'TaskList', params: {priority: editedTask.value.priority, modal: true, action: "updated"}});
 };
