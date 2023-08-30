@@ -69,7 +69,6 @@ onBeforeMount( async() =>
       </template>
     </modal>
   </Teleport>
-  <button id="show-modal" @click="showModal = true">Show Modal</button>
 </template>
 
 <style scoped>

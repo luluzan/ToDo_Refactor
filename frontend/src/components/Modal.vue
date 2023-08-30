@@ -1,15 +1,28 @@
 <script setup>
+import { useRoute, useRouter } from 'vue-router'
 
 const props= defineProps(
 {
 	show: Boolean
 })
 
+const	route = useRoute();
+const	router = useRouter();
+const	priority = route.params.priority;
+const	emit = defineEmits(['close']);
+
+const ftClose = () =>
+{
+	emit('close', 'close');
+	router.push({name: 'TaskList', params: {priority: priority}});
+}
+
 </script>
   
   <template>
 	<Transition name="modal">
-	  <div v-if="show" class="modal-mask" @click="$emit('close')">
+	  <!-- <div v-if="show" class="modal-mask" @click="$emit('close')"> -->
+	  <div v-if="show" class="modal-mask" @click="ftClose()">
 		<div class="modal-container">
 		  <div class="modal-header">
 			<slot name="header">default header</slot>
