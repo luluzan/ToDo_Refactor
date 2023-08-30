@@ -37,9 +37,9 @@ const isAllFieldsFilled = computed(() => {
 const submit = async () => {
   if (isAllFieldsFilled.value) {
     await addTask.addTask(newTask.value);
-    console.log(newTask);
+    alert("New task created")
   } else {
-    console.log('Please fill in all required fields.');
+    alert('Please fill in all required fields.')
   }
 }
 
@@ -59,7 +59,7 @@ const submit = async () => {
       <input v-model="newTask.description" id="description-text" type="text" placeholder="Enter Description" />
 
       <h4>Category (Optional)</h4>
-      <input v-model="newTask.category" id="category-text" type="text" placeholder="Enter Category">
+      <input v-model="newTask.category" id="category-text" type="text" placeholder="Enter Category" />
       
     </div>
     <div>
@@ -87,7 +87,6 @@ const submit = async () => {
         </div>
       </div>
 
-      <p>This field is required</p>
       <div class="priority-container">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -10,7 +10,6 @@ import { useRoute } from 'vue-router';
 
 
 const route = useRoute();
-// const id = 19;
 const id = route.params.id;
 
 const taskText = ref('')
@@ -46,46 +45,44 @@ onBeforeMount(async () => {
 const submit = async () => {
   await getTasks.updateTask(editedTask.value.id, editedTask.value)
   alert('Task updated')
-  console.log("Task updated");
 }
 
 const deleteTask = async () => {
   await getTasks.deleteTaskById(editedTask.value.id)
   alert('Task deleted')
-  console.log("Task deleted");
 }
 
 </script>
 
 <template>
-  <main class="mainContainer">
-    <div id="top">
-      <h2 class="editTaskTitle">Edit Task</h2>
-
+  <main class="main-container">
+    <div id="top"> 
       <CloseButton path="/" fill="white"/>
 
+      <h2 class="edit-task-title">Edit Task</h2>
+
       <h4>Task</h4>
-      <input v-model="editedTask.title" id="taskText" type="text" :placeholder="title" required="true"/>
+      <input v-model="editedTask.title" id="task-text" type="text" :placeholder="title" required="true"/>
 
       <h4>Description (Optional)</h4>
-      <input v-model="editedTask.description" id="descriptionText" type="text" :placeholder="description" />
+      <input v-model="editedTask.description" id="description-text" type="text" :placeholder="description" />
       
       <h4>Category (Optional)</h4>
-      <input v-model="editedTask.category" id="categoryText" type="text" :placeholder="category">
-      <div>
-        <CompleteButton @click="submit()" fill="#FF9E13" />
-      </div>
+      <input v-model="editedTask.category" id="category-text" type="text" :placeholder="category">
+      
     </div>
-
+    <div>
+      <CompleteButton @click="submit()" fill="#FF9E13" />
+    </div>
     <div id="bottom">
-      <div class="dueDateContainer">
+      <div class="due-date-container">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="23"
           viewBox="0 0 20 23"
           fill="none"
-          class="calendarIcon"
+          class="calendar-icon"
         >
           <path
             d="M17.8571 2.85714H15.7143V0.535714C15.7143 0.241071 15.4732 0 15.1786 0H13.3929C13.0982 0 12.8571 0.241071 12.8571 0.535714V2.85714H7.14286V0.535714C7.14286 0.241071 6.90179 0 6.60714 0H4.82143C4.52679 0 4.28571 0.241071 4.28571 0.535714V2.85714H2.14286C0.959821 2.85714 0 3.81696 0 5V20.7143C0 21.8973 0.959821 22.8571 2.14286 22.8571H17.8571C19.0402 22.8571 20 21.8973 20 20.7143V5C20 3.81696 19.0402 2.85714 17.8571 2.85714ZM17.5893 20.7143H2.41071C2.26339 20.7143 2.14286 20.5938 2.14286 20.4464V7.14286H17.8571V20.4464C17.8571 20.5938 17.7366 20.7143 17.5893 20.7143Z"
@@ -93,29 +90,29 @@ const deleteTask = async () => {
           />
         </svg>
 
-        <div class="dueDateContent">
-          <h3 id="dueDateTitle">Due Date</h3>
+        <div class="due-date-content">
+          <h3 id="due-date-title">Due Date</h3>
           <Calendar @date="(date) => editedTask.dueDate = date" />
             <button >Current due date: {{ dueDate }}</button>
         </div>
       </div>
 
-      <div class="priorityContainer">
+      <div class="priority-container">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="5"
           height="16"
           viewBox="0 0 5 16"
           fill="none"
-          class="priorityIcon"
+          class="priority-icon"
         >
           <path
             d="M5 13.5C5 14.8785 3.8785 16 2.5 16C1.1215 16 0 14.8785 0 13.5C0 12.1215 1.1215 11 2.5 11C3.8785 11 5 12.1215 5 13.5ZM0.289375 0.787469L0.714375 9.28747C0.734344 9.68663 1.06378 10 1.46344 10H3.53656C3.93622 10 4.26566 9.68663 4.28562 9.28747L4.71063 0.787469C4.73203 0.359062 4.3905 0 3.96156 0H1.03844C0.6095 0 0.267969 0.359062 0.289375 0.787469Z"
             fill="black"
           />
         </svg>
-        <div class="priorityContent">
-          <h3 id="priorityContentTitle">Priority</h3>
+        <div class="priority-content">
+          <h3 id="priority-content-title">Priority</h3>
           <PriorityDropdown :value="priority" @priority="(priority) => editedTask.priority = priority"/>
             <button>Current priority: {{ priority }}</button>
         </div>
@@ -130,7 +127,7 @@ const deleteTask = async () => {
 </template>
 
 <style scoped>
-.mainContainer {
+/* .mainContainer {
   width: 26.875rem;
   height: 58.25rem;
   overflow: hidden;
@@ -243,6 +240,117 @@ p {
 }
 
 #priorityContentTitle {
+  margin-right: 20px;
+} */
+
+.main-container {
+  height: 100vh;
+  overflow: hidden;
+  background: var(--vt-c-white-soft);
+}
+
+#top {
+  height: 40vh;
+  background: #dd4b39;
+  flex-shrink: 0;
+  padding: 30px 20px;
+}
+
+.edit-task-title {
+  color: var(--vt-c-white);
+  margin: 0;
+  text-align: center;
+}
+
+h3 {
+  font-weight: 700;
+}
+
+h4 {
+  color: #FF9E13;
+  margin: 1rem 0;
+}
+
+input {
+  background-color: #dd4b39;
+  border: none;
+  border-bottom: 1px solid #FF9E13;
+  padding: 5px;
+  color: #ffffff;
+  font-size: 1.2rem;
+  width: 45vmin;
+}
+
+input:focus {
+  border: 2px solid white;
+  outline: 2px solid #FF9E13;
+  border-color: white;
+  color: var(--vt-c-white);
+}
+
+#task-text::placeholder {
+  color: #ffffff;
+  opacity: 0.5;
+}
+
+#description-text::placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+#category-text::placeholder {
+  color: #ffffff;
+  opacity: 0.5;
+}
+
+.due-date-container {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 20px;
+}
+
+.calendar-icon {
+  flex-shrink: 0;
+  fill: white;
+  margin-bottom: 50px;
+  width: 30px;
+  height: 30px;
+}
+
+.due-date-content {
+  margin: 0 0 10px 20px;
+}
+
+.calendar {
+  margin-top: 10px;
+}
+
+p {
+  padding: 5px 0 0 70px; 
+  color: #dd4b39;
+  font-style: italic;
+}
+
+.priority-container {
+  display: flex;
+  align-items: center;
+  margin: 20px 0 0 26px;
+}
+
+.priority-icon {
+  flex-shrink: 0;
+  fill: black;
+  margin-right: 24px;
+  width: 20px;
+  height: 20px;
+}
+
+.priority-content {
+  display: flex;
+  align-items: center;
+}
+
+#priority-content-title {
   margin-right: 20px;
 }
 </style>
