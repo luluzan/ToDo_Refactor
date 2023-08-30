@@ -1,35 +1,54 @@
-# .
+# Project Todolist with Spring Boot and Vue 3
 
-This template should help get you started developing with Vue 3 in Vite.
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5.4-brightgreen) ![Vue 3](https://img.shields.io/badge/Vue-3.0.0-green) ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue)
 
-## Recommended IDE Setup
+A Todolist application that uses Spring Boot and Vue 3 to manage a task list connected to a MySQL database.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Requirements
 
-## Customize configuration
+- Java Development Kit (JDK) 17 or higher.
+- Node.js and npm installed.
+- MySQL Server or phpMyAdmin.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Participants
 
-## Project Setup
+- César Conte Álvarez.
+- Luis Carlos Álvarez Yauca.
+- Leolo Flórez Ramos.
+- Carmen Borja Palmera.
 
-```sh
+## Setup
+
+### Backend (Spring Boot)
+
+1. Clone this repository.
+2. Configure your MySQL database details in `backend/src/main/resources/application.properties`.
+3. Run the Spring Boot application.
+
+```bash
+cd backend
+./mvnw spring-boot:run
+```
+
+### Frontend (Vue3)
+
+1. Open a terminal.
+2. Navigate to the frontend project directory.
+
+```bash
+cd frontend
+```
+
+3. Install the project dependencies.
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+4. Run the Vue server.
 
-```sh
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
+5. Enjoy!
