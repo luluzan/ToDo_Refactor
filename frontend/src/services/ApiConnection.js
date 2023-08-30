@@ -16,19 +16,7 @@ class   ApiConnection
             return (error.message);
         }
     }
-	async getAllTasks()
-	{
-		try 
-		{
-			let response = await axios.get(url);
-			return (response);
-			
-		} 
-		catch (error) 
-		{
-			return (error.message);
-		}
-	}
+	
 
     async getTaskById(id)
     {
@@ -56,18 +44,7 @@ class   ApiConnection
         }
     }
 
-	async addTask(task)
-	{
-		try 
-		{
-			let	response = await axios.post(url, task);
-			return (response);
-		} 
-		catch (error) 
-		{
-			return (error.message);
-		}
-	}
+	
     async addTask(task)
     {
         try 
