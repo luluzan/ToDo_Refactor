@@ -63,7 +63,7 @@ const deleteTask = async () => {
     <div id="top">
       <h2 class="editTaskTitle">Edit Task</h2>
 
-      <CloseButton path="/"/>
+      <CloseButton path="/" fill="white"/>
 
       <h4>Task</h4>
       <input v-model="editedTask.title" id="taskText" type="text" :placeholder="title" required="true"/>

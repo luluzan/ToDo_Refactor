@@ -39,7 +39,7 @@ onBeforeMount( async() =>
 <template>
 	<main class="task-list-layout">
 		<header class="task-list-header">
-			<CloseButton path="/" />
+			<CloseButton path="/" fill="black"/>
 		</header>
 		<section class = "list">
 			<article class="title">
