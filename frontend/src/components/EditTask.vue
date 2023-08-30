@@ -6,12 +6,13 @@ import Calendar from "./Calendar.vue";
 import CloseButton from "../components/CloseButton.vue";
 import DeleteButton from "../components/DeleteButton.vue";
 import { ref, onBeforeMount } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
 const id = route.params.id;
-
-const taskText = ref("");
+const currentDate = ref();
+const currentPriority = ref();
 
 const editedTask = ref({
   id: "",
@@ -24,30 +25,28 @@ const editedTask = ref({
 });
 
 const getTasks = new ApiConnection();
-const title = ref("");
-const description = ref("");
-const category = ref("");
-const dueDate = ref("");
-const priority = ref("");
 
 onBeforeMount(async () => {
   const task = await getTasks.getTaskById(id);
-  title.value = task.data.title;
-  description.value = task.data.description;
-  category.value = task.data.category;
-  dueDate.value = task.data.dueDate;
-  priority.value = task.data.priority;
   editedTask.value.id = id;
+  editedTask.value.title = task.data.title;
+  editedTask.value.description = task.data.description;
+  editedTask.value.category = task.data.category;
+  editedTask.value.dueDate = task.data.dueDate;
+  editedTask.value.priority = task.data.priority;
+  currentDate.value = task.data.dueDate;
+  currentPriority.value = task.data.priority;
 });
 
 const submit = async () => {
+	console.log(editedTask.value);
   await getTasks.updateTask(editedTask.value.id, editedTask.value);
-  alert("Task updated");
+  router.push({name: 'TaskList', params: {priority: editedTask.value.priority, modal: true, action: "updated"}});
 };
 
 const deleteTask = async () => {
   await getTasks.deleteTaskById(editedTask.value.id);
-  alert("Task deleted");
+  router.push({name: 'TaskList', params: {priority: currentPriority.value, modal: true, action: "deleted"}});
 };
 </script>
 
@@ -61,7 +60,7 @@ const deleteTask = async () => {
         v-model="editedTask.title"
         id="task-text"
         type="text"
-        :placeholder="title"
+        :placeholder="editedTask.title"
         required="true"
       />
 
@@ -70,7 +69,7 @@ const deleteTask = async () => {
         v-model="editedTask.description"
         id="description-text"
         type="text"
-        :placeholder="description"
+        :placeholder="editedTask.description"
       />
 
       <h4>Category (Optional)</h4>
@@ -78,7 +77,7 @@ const deleteTask = async () => {
         v-model="editedTask.category"
         id="category-text"
         type="text"
-        :placeholder="category"
+        :placeholder="editedTask.category"
       />
     </div>
     <div>
@@ -102,9 +101,9 @@ const deleteTask = async () => {
             />
           </svg>
             <h3 id="due-date-title">Due Date</h3>
+            <Calendar @date="(date) => (editedTask.dueDate = date)" />
+            <button>Current due date: {{ currentDate }}</button>
           </div>
-          <Calendar @date="(date) => (editedTask.dueDate = date)" />
-            <button>Current due date: {{ dueDate }}</button>
         </div>
 
         <div class="priority-container">
@@ -123,14 +122,14 @@ const deleteTask = async () => {
             />
           </svg>
             <h3 id="priority-content-title">Priority</h3>
-          </div>
-          <PriorityDropdown
-              :value="priority"
+            <PriorityDropdown
               @priority="(priority) => (editedTask.priority = priority)"
             />
-            <button>Current priority: {{ priority }}</button>
+            <button>Current priority: {{ currentPriority }}</button>
+          </div>
         </div>
       </div>
+    
     <div>
       <DeleteButton @click="deleteTask()" />
     </div>

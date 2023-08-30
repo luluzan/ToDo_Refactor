@@ -17,7 +17,10 @@ const	props = defineProps
 		modal:
 		{
 			type: Boolean,
-			default: false,
+		},
+		action:
+		{
+			type: String,
 		}
 	}
 )
@@ -29,7 +32,7 @@ const	showModal = ref(false);
 
 onBeforeMount( async() => 
 {
-	console.log(props.modal);
+	showModal.value = props.modal;
 	const taskData = await getTasks.getAllTasks();
 	tasks.value = taskData.data.filter(task => task.priority === props.priority);
 }
@@ -62,10 +65,11 @@ onBeforeMount( async() =>
 	<Teleport to="body">
     <modal :show="showModal" @close="showModal = false">
       <template #header>
-        <h3>custom header</h3>
+        <h3>Task {{ action }} succesfully</h3>
       </template>
     </modal>
   </Teleport>
+  <button id="show-modal" @click="showModal = true">Show Modal</button>
 </template>
 
 <style scoped>

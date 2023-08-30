@@ -9,27 +9,13 @@ const props= defineProps(
   
   <template>
 	<Transition name="modal">
-	  <div v-if="show" class="modal-mask">
+	  <div v-if="show" class="modal-mask" @click="$emit('close')">
 		<div class="modal-container">
 		  <div class="modal-header">
 			<slot name="header">default header</slot>
 		  </div>
-  
-		  <div class="modal-body">
-			<slot name="body">default body</slot>
-		  </div>
-  
-		  <div class="modal-footer">
-			<slot name="footer">
-			  default footer
-			  <button
-				class="modal-default-button"
-				@click="$emit('close')"
-			  >OK</button>
-			</slot>
 		  </div>
 		</div>
-	  </div>
 	</Transition>
   </template>
   
@@ -57,7 +43,7 @@ const props= defineProps(
   }
   
   .modal-header h3 {
-	margin-top: 0;
+	margin: 0.7rem;
 	color: #42b983;
   }
   
@@ -67,6 +53,13 @@ const props= defineProps(
   
   .modal-default-button {
 	float: right;
+	margin: 1rem;
+	background-color: #4CAF50; /* Green */
+  	border: none;
+  	color: white;
+  	text-align: center;
+  	text-decoration: none;
+	padding: 10px 20px;
   }
   
   /*
