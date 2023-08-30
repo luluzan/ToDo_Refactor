@@ -21,7 +21,6 @@ const ftClose = () =>
   
   <template>
 	<Transition name="modal">
-	  <!-- <div v-if="show" class="modal-mask" @click="$emit('close')"> -->
 	  <div v-if="show" class="modal-mask" @click="ftClose()">
 		<div class="modal-container">
 		  <div class="modal-header">

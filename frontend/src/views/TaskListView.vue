@@ -10,6 +10,5 @@ const	action = route.params.action || "";
 </script>
 
 <template>
-	<!-- <TaskList /> -->
 	<TaskListPriority :priority="priority" :modal="modal" :action="action"/>
 </template>
