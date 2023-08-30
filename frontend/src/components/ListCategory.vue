@@ -1,7 +1,7 @@
 <script setup>
 import StatusSelector from "../components/StatusSelector.vue"
 import DetailsButton from "../components/DetailsButton.vue"
-import { onBeforeMount } from "vue";
+
 
 const props = defineProps({
   priority: {
