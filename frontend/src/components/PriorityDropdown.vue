@@ -13,8 +13,7 @@ onUpdated(() => {
 <template>
     <div class="dropdown">
         <select v-model="priority"
-          class="select-dropdown"
-        >
+          class="select-dropdown">
           
           <option value="normal">Normal</option>
           
@@ -27,4 +26,9 @@ onUpdated(() => {
 </template>
 
 <style scoped>
+.select-dropdown{
+  width: 10rem;
+  height: 2rem;
+}
+
 </style>

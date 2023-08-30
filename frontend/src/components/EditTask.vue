@@ -55,9 +55,7 @@ const deleteTask = async () => {
   <main class="main-container">
     <div id="top">
       <CloseButton path="/" fill="white" />
-
       <h2 class="edit-task-title">Edit Task</h2>
-
       <h4>Task</h4>
       <input
         v-model="editedTask.title"
@@ -89,7 +87,8 @@ const deleteTask = async () => {
 
       <div id="bottom">
         <div class="due-date-container">
-          <svg
+          <div class="due-date-content">
+            <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="23"
@@ -102,16 +101,15 @@ const deleteTask = async () => {
               fill="black"
             />
           </svg>
-
-          <div class="due-date-content">
             <h3 id="due-date-title">Due Date</h3>
-            <Calendar @date="(date) => (editedTask.dueDate = date)" />
-            <button>Current due date: {{ dueDate }}</button>
           </div>
+          <Calendar @date="(date) => (editedTask.dueDate = date)" />
+            <button>Current due date: {{ dueDate }}</button>
         </div>
 
         <div class="priority-container">
-          <svg
+          <div class="priority-content">
+            <svg
             xmlns="http://www.w3.org/2000/svg"
             width="5"
             height="16"
@@ -124,17 +122,15 @@ const deleteTask = async () => {
               fill="black"
             />
           </svg>
-          <div class="priority-content">
             <h3 id="priority-content-title">Priority</h3>
-            <PriorityDropdown
+          </div>
+          <PriorityDropdown
               :value="priority"
               @priority="(priority) => (editedTask.priority = priority)"
             />
             <button>Current priority: {{ priority }}</button>
-          </div>
         </div>
       </div>
-    
     <div>
       <DeleteButton @click="deleteTask()" />
     </div>
@@ -142,47 +138,49 @@ const deleteTask = async () => {
 </template>
 
 <style scoped>
+
 .main-container {
-  height: 100vh;
   overflow: hidden;
   background: var(--vt-c-white-soft);
+  font-size: 62.5%;
 }
 
 #top {
-  height: 40vh;
   background: #dd4b39;
-  flex-shrink: 0;
-  padding: 30px 20px;
+  padding: 0.4rem 2rem;
 }
 
 .edit-task-title {
   color: var(--vt-c-white);
   margin: 0;
   text-align: center;
+  font-size:1.2rem;
 }
 
 h3 {
   font-weight: 700;
+  font-size:1.2rem;
 }
 
 h4 {
-  color: #ff9e13;
+  color: #FF9E13;
   margin: 1rem 0;
+  font-size:1.2rem;
 }
 
 input {
   background-color: #dd4b39;
   border: none;
-  border-bottom: 1px solid #ff9e13;
-  padding: 5px;
+  border-bottom: 0.1rem solid #FF9E13;
+  padding: 0.5rem;
   color: #ffffff;
   font-size: 1.2rem;
   width: 45vmin;
 }
 
 input:focus {
-  border: 2px solid white;
-  outline: 2px solid #ff9e13;
+  border: 0.2rem solid white;
+  outline: 0.2rem solid #FF9E13;
   border-color: white;
   color: var(--vt-c-white);
 }
@@ -204,53 +202,51 @@ input:focus {
 
 .due-date-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin: 0 0 0 20px;
 }
 
 .calendar-icon {
-  flex-shrink: 0;
   fill: white;
-  margin-bottom: 50px;
-  width: 30px;
-  height: 30px;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .due-date-content {
-  margin: 0 0 10px 20px;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .calendar {
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 
 p {
-  padding: 5px 0 0 70px;
+  padding: 0.5rem 0 0 7rem; 
   color: #dd4b39;
   font-style: italic;
 }
 
 .priority-container {
   display: flex;
-  align-items: center;
-  margin: 20px 0 0 26px;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .priority-icon {
-  flex-shrink: 0;
   fill: black;
-  margin-right: 24px;
-  width: 20px;
-  height: 20px;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
+#priority-content-title{
+  margin-bottom: 1.2rem;
+}
 .priority-content {
   display: flex;
-  align-items: center;
-}
-
-#priority-content-title {
-  margin-right: 20px;
+  flex-direction: row;
 }
 
 #bottom {
@@ -259,4 +255,15 @@ p {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
+@media (max-width: 648px) {
+  #bottom{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap:3rem;
+    margin-left: 1rem;
+  }
+}
+
 </style>
