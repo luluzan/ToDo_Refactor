@@ -1,10 +1,9 @@
 package com.todolist.services;
 
 import com.todolist.model.ToDo;
-import com.todolist.model.repository.ToDosRepository;
+import com.todolist.repository.ToDosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
 @Service
