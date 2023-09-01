@@ -11,8 +11,10 @@ public class ToDosServices {
     @Autowired
     ToDosRepository toDosRepository;
 
+    //Deberia revisar si se hay entradas duplicadas
     public String saveTask(ToDo toDo) {
         try{
+            if(toDosRepository.findIfItAlreadyExists(toDo.getCategory(), toDo.getDescription(), toDo.getDueDate(), toDo.isStatus(), toDo.getPriority(), toDo.getCategory()))
             toDosRepository.save(toDo);
             return "Added new task";
         }catch(Exception error) {

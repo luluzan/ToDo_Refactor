@@ -90,4 +90,25 @@ class ApirestTodolistApplicationTests {
 		assertEquals(myResult3, "Task doesn't exist");
 	}
 
+	@Test
+	void test_should_save_a_task() {
+
+		ToDo task1=new ToDo(1L, "testear front", "Usar Mockito y pañuelo", Date.valueOf("2023-09-22"), false, ToDo.Priority.valueOf("normal"), "Sin Categoria"  );
+		ToDo task2=new ToDo(2L, "testear back", "Usar vitest y lo que haga falta", Date.valueOf("2023-09-21"), false, ToDo.Priority.valueOf("urgent"), "Con Categoria"  );
+
+		ArrayList<ToDo> myArrayList=new ArrayList<>();
+		myArrayList.add(task1);
+
+		when(myRepository.save(task2)).thenReturn(task2);
+		when(myRepository.save(task1)).thenReturn();
+
+		ToDo myResult=myServices.getTaskById(1);
+
+		assertEquals(myResult, task1);
+	}
+
+
+
+
+
 }
