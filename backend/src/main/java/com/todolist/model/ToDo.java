@@ -1,6 +1,7 @@
 package com.todolist.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +12,7 @@ import java.sql.Date;
 @Table(name = "todo")
 @Getter
 @Setter
+@AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class ToDo {
     public ToDo() {
@@ -39,7 +41,7 @@ public class ToDo {
     @Column
     private String category;
 
-    enum Priority
+    public enum Priority
     {
         normal,
         high,

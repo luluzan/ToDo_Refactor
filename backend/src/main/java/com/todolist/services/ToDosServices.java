@@ -28,10 +28,15 @@ public class ToDosServices {
         return (ArrayList<ToDo>) toDosRepository.findAll();
     }
 
+    //Añadida comprobacion de si la tarea existe o no para borrarla.
     public String deleteTask(long id) {
         try{
-            toDosRepository.deleteById(id);
-            return "Deleted "+id;
+            if(toDosRepository.existsById(id)){
+                toDosRepository.deleteById(id);
+                return "Deleted "+id;
+            }
+            else return "Task doesn't exist";
+
         }catch(Exception error) {
             return error.getMessage();
         }
