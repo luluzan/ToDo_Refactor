@@ -1,4 +1,4 @@
-package com.todolist.model.repository;
+package com.todolist.repository;
 
 import com.todolist.model.ToDo;
 import org.springframework.data.jpa.repository.JpaRepository;
