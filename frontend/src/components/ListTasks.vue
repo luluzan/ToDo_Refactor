@@ -5,10 +5,9 @@ import { ref, onBeforeMount } from 'vue';
 import AddButton from './AddButton.vue';
 
 const tasks = ref([]);
-const getTasks = new ApiConnection();
 
 function getAllTasks() {
-  getTasks.getAllTasks()
+  ApiConnection.getAllTasks()
   .then(response => {
     tasks.value = response.data;
     tasks.value.sort(((a, b) => {

@@ -26,8 +26,6 @@ const newTask = ref({
   category: ''
 })
 
-const addTask = new ApiConnection();
-
 const isAllFieldsFilled = computed(() => {
   return (
     newTask.value.title.trim() !== '' &&
@@ -38,7 +36,7 @@ const isAllFieldsFilled = computed(() => {
 
 const submit = async () => {
   if (isAllFieldsFilled.value) {
-    await addTask.addTask(newTask.value);
+    await ApiConnection.addTask(newTask.value);
 	router.push({name: 'TaskList', params: {priority: newTask.value.priority, modal: true, action: "added"}});
   } else {
     alert('Please fill in all required fields.')

@@ -1,6 +1,6 @@
 <script setup>
 import { onBeforeMount, ref } from 'vue';
-import GetTasks from '../services/ApiConnection'
+import ApiConnection from '../services/ApiConnection'
 import TaskSelection from './TaskSelection.vue'
 import AddButton from './AddButton.vue'
 import CloseButton from './CloseButton.vue'
@@ -26,14 +26,13 @@ const	props = defineProps
 )
 
 const	tasks = ref([]);
-const	getTasks = new GetTasks();
 const	showModal = ref(false);
 
 
 onBeforeMount( async() => 
 {
 	showModal.value = props.modal;
-	const taskData = await getTasks.getAllTasks();
+	const taskData = await ApiConnection.getAllTasks();
 	tasks.value = taskData.data.filter(task => task.priority === props.priority);
 }
 )

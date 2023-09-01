@@ -1,5 +1,5 @@
 <script setup>
-import GetTasks from "../services/ApiConnection"
+import ApiConnection from "../services/ApiConnection"
 
 	const	props = defineProps (
 		{
@@ -15,14 +15,13 @@ import GetTasks from "../services/ApiConnection"
 	)
 
 
-	const	getTasks = new GetTasks();
 	const	emit = defineEmits(['response']);
 	
 	const	ftStatusChange = async() =>
 	{
-		const task = await getTasks.getTaskById(props.id);
+		const task = await ApiConnection.getTaskById(props.id);
 		task.data.status = !task.data.status;
-		await getTasks.updateTask(props.id, task.data);
+		await ApiConnection.updateTask(props.id, task.data);
 		emit('response', task.data.status);
 	}
 

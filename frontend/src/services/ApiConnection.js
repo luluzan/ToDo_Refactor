@@ -1,75 +1,25 @@
-import axios from 'axios'
+import http from '../httpCommon.js';
 
-const   url = "http://localhost:8080/todo";
-
-class   ApiConnection
-{
-    async getAllTasks()
-    {
-        try 
-        {
-            let response = await axios.get(url);
-            return (response);
-        } 
-        catch (error) 
-        {
-            return (error.message);
-        }
-    }
-	
-
-    async getTaskById(id)
-    {
-        try 
-        {
-            let response = await axios.get(`${url}/${id}`);
-            return (response);
-        } 
-        catch (error) 
-        {
-            return (error.message);
-        }
+class ApiConnection {
+    getAllTasks() {
+        return http.get();
     }
 
-    async deleteTaskById(id)
-    {
-        try 
-        {
-            let response = await axios.delete(`${url}/${id}`);
-            return (response);
-        } 
-        catch (error) 
-        {
-            return (error.message);
-        }
+    getTaskById(id) {
+        return http.get(`/${id}`);
     }
 
-	
-    async addTask(task)
-    {
-        try 
-        {
-            let response = await axios.post(url, task);
-            return (response);
-        } 
-        catch (error) 
-        {
-            return (error.message);
-        }
+    addTask(task) {
+        return http.post('', task);
+    }
+   
+    updateTask(id, task) {
+        return http.put(`${id}`, task);
     }
 
-    async updateTask(id, task)
-    {
-        try 
-        {
-            let response = await axios.put(`${url}/${id}`, task);
-            return (response);
-        } 
-        catch (error) 
-        {
-            return (error.message);
-        }
+    delete(id) {
+        return http.delete(`${id}`);
     }
 }
 
-export default ApiConnection;
+export default new ApiConnection();
