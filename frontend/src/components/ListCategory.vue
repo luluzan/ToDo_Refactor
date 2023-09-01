@@ -36,6 +36,7 @@ const props = defineProps({
     </div>
   </main>
 </template>
+
 <style scoped>
 
 @font-face
