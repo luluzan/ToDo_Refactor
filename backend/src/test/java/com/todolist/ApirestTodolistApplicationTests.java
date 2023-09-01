@@ -98,13 +98,46 @@ class ApirestTodolistApplicationTests {
 
 		ArrayList<ToDo> myArrayList=new ArrayList<>();
 		myArrayList.add(task1);
+		myArrayList.add(task2);
 
-		when(myRepository.save(task2)).thenReturn(task2);
-		when(myRepository.save(task1)).thenReturn();
+		when(myRepository.existsById(task1.getId())).thenReturn(true);
+		when(myRepository.existsById(task2.getId())).thenReturn(false);
+		lenient().when(myRepository.existsById(null)).thenThrow(new IllegalArgumentException("Cannot invoke \"com.todolist.model.ToDo.getId()\" because \"updateTask\" is null") );
 
-		ToDo myResult=myServices.getTaskById(1);
+		when(myRepository.save(task1)).thenReturn(task1);
+		lenient().when(myRepository.save(task2)).thenReturn(task2);
+		//when(myRepository.save(null)).thenThrow(IllegalArgumentException.class );
 
-		assertEquals(myResult, task1);
+		String myResult=myServices.updateTask(task1);
+		String myResult2=myServices.updateTask(task2);
+		String myResult3=myServices.updateTask(null);
+
+		assertEquals(myResult,"Task updated: testear front" );
+		assertEquals(myResult2, "Task not updated: Record with ID : 2 does not exist");
+		assertEquals(myResult3,"Task not updated: Cannot invoke \"com.todolist.model.ToDo.getId()\" because \"updateTask\" is null" );
+	}
+
+	@Test
+	void test_should_upgrade_a_task() {
+
+		ToDo task1=new ToDo(1L, "testear front", "Usar Mockito y pañuelo", Date.valueOf("2023-09-22"), false, ToDo.Priority.valueOf("normal"), "Sin Categoria"  );
+		ToDo task2=new ToDo(2L, "testear back", "Usar vitest y lo que haga falta", Date.valueOf("2023-09-21"), false, ToDo.Priority.valueOf("urgent"), "Con Categoria"  );
+
+		ArrayList<ToDo> myArrayList=new ArrayList<>();
+		myArrayList.add(task1);
+		myArrayList.add(task2);
+
+		when(myRepository.findIfItAlreadyExists(task1)).thenReturn(true);
+		when(myRepository.findIfItAlreadyExists(task2)).thenReturn(false);
+
+		when(myRepository.save(task1)).thenReturn(task1);
+		lenient().when(myRepository.save(task2)).thenReturn(task2);
+
+		String myResult=myServices.saveTask(task1);
+		String myResult2=myServices.saveTask(task2);
+
+		assertEquals(myResult,"Added new task" );
+		assertEquals(myResult2, "Task already exists");
 	}
 
 
