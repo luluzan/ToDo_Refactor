@@ -54,25 +54,12 @@ const ftClose = () =>
 	transition: all 0.3s ease;
   }
   
-  .modal-header h3 {
-	margin: 0.7rem;
-	color: #42b983;
-  }
+
   
   .modal-body {
 	margin: 20px 0;
   }
   
-  .modal-default-button {
-	float: right;
-	margin: 1rem;
-	background-color: #4CAF50; /* Green */
-  	border: none;
-  	color: white;
-  	text-align: center;
-  	text-decoration: none;
-	padding: 10px 20px;
-  }
   
   /*
    * The following styles are auto-applied to elements with
