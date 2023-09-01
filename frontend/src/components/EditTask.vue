@@ -24,10 +24,8 @@ const editedTask = ref({
   category: "",
 });
 
-const getTasks = new ApiConnection();
-
 onBeforeMount(async () => {
-  const task = await getTasks.getTaskById(id);
+  const task = await ApiConnection.getTaskById(id);
   editedTask.value.id = id;
   editedTask.value.title = task.data.title;
   editedTask.value.description = task.data.description;
@@ -39,7 +37,7 @@ onBeforeMount(async () => {
 });
 
 const submit = async () => {
-  await getTasks.updateTask(editedTask.value.id, editedTask.value);
+  await ApiConnection.updateTask(editedTask.value.id, editedTask.value);
   router.push({
     name: "TaskList",
     params: {
@@ -51,7 +49,7 @@ const submit = async () => {
 };
 
 const deleteTask = async () => {
-  await getTasks.deleteTaskById(editedTask.value.id);
+  await ApiConnection.deleteTaskById(editedTask.value.id);
   router.push({
     name: "TaskList",
     params: { priority: currentPriority.value, modal: true, action: "deleted" },

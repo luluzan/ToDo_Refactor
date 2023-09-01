@@ -17,7 +17,7 @@ class ApiConnection {
         return http.put(`${id}`, task);
     }
 
-    delete(id) {
+    deleteTaskById(id) {
         return http.delete(`${id}`);
     }
 }
