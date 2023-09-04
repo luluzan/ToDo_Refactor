@@ -90,7 +90,7 @@ class ToDosServicesTest {
     }
 
     @Test
-    void test_should_save_a_task() {
+    void test_should_update_a_task() {
 
         ToDo task1=new ToDo(1L, "testear front", "Usar Mockito y pañuelo", Date.valueOf("2023-09-22"), false, ToDo.Priority.valueOf("normal"), "Sin Categoria"  );
         ToDo task2=new ToDo(2L, "testear back", "Usar vitest y lo que haga falta", Date.valueOf("2023-09-21"), false, ToDo.Priority.valueOf("urgent"), "Con Categoria"  );
@@ -117,7 +117,7 @@ class ToDosServicesTest {
     }
 
     @Test
-    void test_should_upgrade_a_task() {
+    void test_should_save_a_task() {
 
         ToDo task1=new ToDo(1L, "testear front", "Usar Mockito y pañuelo", Date.valueOf("2023-09-22"), false, ToDo.Priority.valueOf("normal"), "Sin Categoria"  );
         ToDo task2=new ToDo(2L, "testear back", "Usar vitest y lo que haga falta", Date.valueOf("2023-09-21"), false, ToDo.Priority.valueOf("urgent"), "Con Categoria"  );
@@ -126,8 +126,8 @@ class ToDosServicesTest {
         myArrayList.add(task1);
         myArrayList.add(task2);
 
-        when(myRepository.findIfItAlreadyExists(task1)).thenReturn(true);
-        when(myRepository.findIfItAlreadyExists(task2)).thenReturn(false);
+        when(myRepository.findIfItAlreadyExists(task1)).thenReturn(false);
+        when(myRepository.findIfItAlreadyExists(task2)).thenReturn(true);
 
         when(myRepository.save(task1)).thenReturn(task1);
         lenient().when(myRepository.save(task2)).thenReturn(task2);

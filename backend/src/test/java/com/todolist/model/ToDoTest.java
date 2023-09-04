@@ -38,7 +38,7 @@ class ToDoTest {
 
     @Test
     void isStatus() {
-        assertEquals(task1.getDueDate(),false);
+        assertEquals(task1.isStatus(),false);
     }
 
     @Test

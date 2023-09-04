@@ -15,14 +15,16 @@ public class ToDosServices {
     public String saveTask(ToDo toDo) {
         try{
             //if(toDosRepository.findIfItAlreadyExists(toDo.getCategory(), toDo.getDescription(), toDo.getDueDate(), toDo.isStatus(), toDo.getPriority(), toDo.getCategory()))
-            if(toDosRepository.findIfItAlreadyExists(toDo)){
+            if(toDosRepository.findIfItAlreadyExists(toDo)==false){
                 toDosRepository.save(toDo);
                 return "Added new task";
             }
-            else return "Task already exists";
+            else {
+                return "Task already exists";}
 
         }catch(Exception error) {
-            return error.getMessage();
+            //return error.getMessage();
+            return "excepcion";
         }
     }
 
