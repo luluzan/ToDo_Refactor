@@ -1,5 +1,6 @@
 package com.todolist.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.todolist.model.ToDo;
 import com.todolist.repository.ToDosRepository;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(ToDosController.class)
@@ -108,9 +110,9 @@ class ToDosControllerTest {
 
         // Crea un ObjectMapper para serializar objetos Java a JSON
         ObjectMapper objectMapper = new ObjectMapper();
-
         String bodyTask2=objectMapper.writeValueAsString(task2);
 
+        //Emula el envio
         MockHttpServletResponse response2 = mockMvc.perform(MockMvcRequestBuilders
                 .post("/todo")
                 .content(bodyTask2)
@@ -123,10 +125,26 @@ class ToDosControllerTest {
     }
 
     @Test
-    void saveTask() {
-    }
+    void test_if_can_upgrade_a_Tasks() throws Exception {
+        when(myServices.updateTask(any(ToDo.class))).thenReturn("Gets services");
 
-    @Test
-    void updateTask() {
+        // Crea un ObjectMapper para serializar objetos Java a JSON
+        ObjectMapper objectMapper = new ObjectMapper();
+        String bodyTask2=objectMapper.writeValueAsString(task2);
+
+        //long example=123;
+        ToDo toDo=new ToDo();
+        toDo.setId(123);
+
+        MockHttpServletResponse response2 = mockMvc.perform(MockMvcRequestBuilders
+                .put("/todo/123")
+                .content(bodyTask2)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andReturn()
+                .getResponse();
+
+        assertEquals(200, response2.getStatus());
+        assertEquals("Gets services", response2.getContentAsString());
+        assertEquals(123, toDo.getId());
     }
 }
